@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { db, auth } from '../firebase';
 import { collection, query, orderBy, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
-import { CheckCircle, Mail, Inbox } from 'lucide-react';
+import { CheckCircle, Mail} from 'lucide-react';
 
 interface Message {
   id: string;
