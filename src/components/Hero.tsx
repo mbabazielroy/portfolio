@@ -38,7 +38,7 @@ export default function Hero() {
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full opacity-10 blur-3xl animate-pulse" />
               <div className="absolute inset-4 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full opacity-10 blur-2xl animate-pulse delay-100" />
               <img
-                src="/dsc1393.JPG"
+                src="src/components/dsc1393.JPG"
                 alt="Elroy Mbabazi"
                 className="relative w-full h-full object-cover rounded-full border-4 border-white dark:border-gray-800 shadow-2xl"
               />
