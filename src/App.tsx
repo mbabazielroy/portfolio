@@ -1,4 +1,5 @@
 import { Code, Database, FileCode, Github, Linkedin, Mail, Phone, Server } from 'lucide-react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ContactForm from './components/ContactForm';
 import EducationCard from './components/EducationCard';
 import Hero from './components/Hero';
@@ -6,6 +7,7 @@ import Navbar from './components/Navbar';
 import ProjectCard from './components/ProjectCard';
 import SectionHeading from './components/SectionHeading';
 import SkillCard from './components/SkillCard';
+import AdminMessages from './components/AdminMessages';
 import { education, projects } from './data';
 
 const skills = [
@@ -15,7 +17,7 @@ const skills = [
   { name: 'Software Engineering', icon: <Code className="w-6 h-6" /> },
 ];
 
-export default function App() {
+function MainContent() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       <Navbar />
@@ -160,5 +162,16 @@ export default function App() {
         </div>
       </footer>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainContent />} />
+        <Route path="/admin" element={<AdminMessages />} />
+      </Routes>
+    </Router>
   );
 }
