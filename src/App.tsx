@@ -1,13 +1,19 @@
-import { Code, Database, FileCode, Github, Linkedin, Mail, Phone, Server } from 'lucide-react';
+import {
+  Code,
+  Database,
+  FileCode,
+  Github,
+  Linkedin,
+  Mail,
+  Phone,
+  Server
+} from 'lucide-react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ContactForm from './components/ContactForm';
+import { Suspense, lazy } from 'react';
 import EducationCard from './components/EducationCard';
-import Hero from './components/Hero';
 import Navbar from './components/Navbar';
-import ProjectCard from './components/ProjectCard';
 import SectionHeading from './components/SectionHeading';
 import SkillCard from './components/SkillCard';
-import AdminMessages from './components/AdminMessages';
 import { education, projects } from './data';
 
 const skills = [
@@ -17,11 +23,18 @@ const skills = [
   { name: 'Software Engineering', icon: <Code className="w-6 h-6" /> },
 ];
 
+const ContactFormLazy = lazy(() => import('./components/ContactForm'));
+const AdminMessagesLazy = lazy(() => import('./components/AdminMessages'));
+const HeroLazy = lazy(() => import('./components/Hero'));
+const ProjectCardLazy = lazy(() => import('./components/ProjectCard'));
+
 function MainContent() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       <Navbar />
-      <Hero />
+      <Suspense fallback={<div>Loading...</div>}>
+        <HeroLazy />
+      </Suspense>
 
       {/* About Section */}
       <section id="about" className="py-20">
@@ -103,7 +116,9 @@ function MainContent() {
           />
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
-              <ProjectCard key={index} project={project} />
+              <Suspense key={index} fallback={<div>Loading...</div>}>
+                <ProjectCardLazy key={index} project={project} />
+              </Suspense>
             ))}
           </div>
         </div>
@@ -117,7 +132,9 @@ function MainContent() {
             subtitle="Let's work together"
           />
           <div className="grid lg:grid-cols-2 gap-12">
-            <ContactForm />
+            <Suspense fallback={<div>Loading...</div>}>
+              <ContactFormLazy />
+            </Suspense>
             <div className="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-sm">
               <h3 className="text-xl font-bold mb-6">Contact Information</h3>
               <div className="space-y-6">
@@ -170,7 +187,7 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<MainContent />} />
-        <Route path="/admin" element={<AdminMessages />} />
+        <Route path="/admin" element={<Suspense fallback={<div>Loading...</div>}><AdminMessagesLazy /></Suspense>} />
       </Routes>
     </Router>
   );
