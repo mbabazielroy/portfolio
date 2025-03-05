@@ -6,6 +6,11 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
+  // Get the appropriate properties based on which format is used
+  const technologies = project.technologies || project.tags || [];
+  const githubUrl = project.githubUrl || project.github || '';
+  const liveUrl = project.liveUrl || project.demo || '';
+
   return (
     <div className="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-200">
       <div className="relative overflow-hidden">
@@ -22,34 +27,36 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {project.description}
         </p>
         <div className="flex flex-wrap gap-2">
-          {project.technologies.map((tech) => (
+          {technologies.map((tech) => (
             <span
               key={tech}
-              className="text-sm px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-700"
+              className="px-2 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full"
             >
               {tech}
             </span>
           ))}
         </div>
-        <div className="flex gap-4 pt-4">
-          {project.githubUrl && (
+        <div className="flex space-x-4 pt-2">
+          {githubUrl && (
             <a
-              href={project.githubUrl}
-              className="p-2 rounded-full bg-gray-100 dark:bg-gray-700 hover:scale-110 transition-transform"
+              href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
+              className="flex items-center text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
             >
-              <Github className="w-5 h-5" />
+              <Github className="mr-1" size={16} />
+              <span>Code</span>
             </a>
           )}
-          {project.liveUrl && (
+          {liveUrl && (
             <a
-              href={project.liveUrl}
-              className="p-2 rounded-full bg-gray-100 dark:bg-gray-700 hover:scale-110 transition-transform"
+              href={liveUrl}
               target="_blank"
               rel="noopener noreferrer"
+              className="flex items-center text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
             >
-              <Link className="w-5 h-5" />
+              <Link className="mr-1" size={16} />
+              <span>Demo</span>
             </a>
           )}
         </div>

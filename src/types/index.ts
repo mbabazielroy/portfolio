@@ -9,10 +9,16 @@ export interface Education {
 export interface Project {
   title: string;
   description: string;
-  technologies: string[];
+  image: string;
+  // Make both property sets optional but ensure at least one set exists
+  // First format properties
+  tags?: string[];
+  github?: string;
+  demo?: string;
+  // Second format properties
+  technologies?: string[];
   githubUrl?: string;
   liveUrl?: string;
-  image: string;
 }
 
 export interface ContactForm {

@@ -48,3 +48,55 @@ export default tseslint.config({
   },
 })
 ```
+
+# Portfolio with AI Project Recommendations
+
+## Setup
+
+### Frontend
+1. Install dependencies:
+   ```
+   npm install
+   ```
+
+2. Create a `.env.local` file with:
+   ```
+   VITE_API_URL=http://localhost:3001
+   ```
+
+3. Start the development server:
+   ```
+   npm run dev
+   ```
+
+### Backend
+1. Navigate to the backend directory:
+   ```
+   cd backend
+   ```
+
+2. Install dependencies:
+   ```
+   npm install
+   ```
+
+3. Create a `.env` file with:
+   ```
+   OPENAI_API_KEY=your_openai_api_key
+   PORT=3001
+   ```
+
+4. Start the server:
+   ```
+   npm start
+   ```
+
+## Production Deployment
+
+For production, deploy the backend to a service like:
+- Heroku
+- Render
+- Railway
+- AWS Lambda
+
+Then update the `VITE_API_URL` in your frontend environment to point to your deployed backend URL.

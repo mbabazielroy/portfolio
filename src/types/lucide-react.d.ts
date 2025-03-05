@@ -9,6 +9,7 @@ declare module 'lucide-react' {
 
   export type Icon = FC<IconProps>;
 
+  // Add all the icons we're using
   export const ArrowRight: Icon;
   export const CheckCircle: Icon;
   export const Code: Icon;

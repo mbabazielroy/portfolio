@@ -15,6 +15,7 @@ import Navbar from './components/Navbar';
 import SectionHeading from './components/SectionHeading';
 import SkillCard from './components/SkillCard';
 import { education, projects } from './data';
+import ChatBot from './components/ChatBot';
 
 const skills = [
   { name: 'Frontend Development', icon: <FileCode className="w-6 h-6" /> },
@@ -187,8 +188,15 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<MainContent />} />
-        <Route path="/admin" element={<Suspense fallback={<div>Loading...</div>}><AdminMessagesLazy /></Suspense>} />
+        <Route path="/admin" element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <AdminMessagesLazy />
+          </Suspense>
+        } />
       </Routes>
+
+      {/* Add the ChatBot component */}
+      <ChatBot projects={projects} />
     </Router>
   );
 }
