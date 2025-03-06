@@ -8,7 +8,7 @@ import {
   Phone,
   Server
 } from 'lucide-react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import EducationCard from './components/EducationCard';
 import Navbar from './components/Navbar';
