@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { auth } from '../firebase';
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import MessageList from './MessageList';
-import { Mail, LogOut, Inbox, CheckCircle } from 'lucide-react';
+import { Mail, LogOut as LogOutIcon, Inbox, CheckCircle } from 'lucide-react';
 
 export default function AdminMessages() {
   const [email, setEmail] = useState('');
@@ -129,7 +129,7 @@ export default function AdminMessages() {
               onClick={handleLogout}
               className="inline-flex items-center px-4 py-2 text-sm text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 focus:outline-none"
             >
-              <LogOut className="h-4 w-4 mr-2" />
+              <LogOutIcon className="h-4 w-4 mr-2" />
               Sign Out
             </button>
           </div>

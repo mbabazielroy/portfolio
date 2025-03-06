@@ -1,8 +1,8 @@
 import type { Project } from '../types';
 
 // API URL (use environment variable for flexibility)
-// In production, this should point to your Vercel-deployed backend
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+// In production, this will be the same domain as your frontend
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 export async function getProjectRecommendations(
   query: string,
@@ -10,7 +10,7 @@ export async function getProjectRecommendations(
 ): Promise<string> {
   try {
     // Show loading state in UI if needed
-    const response = await fetch(`${API_URL}/api/recommendations`, {
+    const response = await fetch(`${API_URL}/recommendations`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
