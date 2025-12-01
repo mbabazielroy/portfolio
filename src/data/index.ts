@@ -8,7 +8,7 @@ export const education = [
   },
   {
     school: "Tacoma Community College",
-    degree: "Associate's Degree",
+    degree: "Associate's Degree in  Computer Engineering",
     location: "Tacoma, WA, USA",
     period: "2019 - 2022",
     image: "https://websterart.com/tcc/images/15-1big.jpg"
@@ -45,6 +45,15 @@ export const projects = [
     githubUrl: "https://github.com/mbabazielroy/shinedemure",
     liveUrl: "https://shinedemure.com",
     image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80"
-  }
+  },
+  {
+    title: "PaintManager",
+    description:"An app that helps users manage their painting projects, including color selection.",
+    technologies: ["Java"],
+    githubUrl: "https://github.com/mbabazielroy/Paint-Manager",
+    liveUrl: "",
+    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80"
+  },
+
   // Add more projects as needed
 ];

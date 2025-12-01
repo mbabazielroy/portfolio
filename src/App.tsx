@@ -71,13 +71,13 @@ function MainContent() {
                   <Linkedin className="w-6 h-6" />
                 </a>
                 <a
-                  href="mbabazielroy@yahoo.com"
+                  href="mailto:mbabazielroy@yahoo.com"
                   className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl hover:scale-110 transition-transform"
                 >
                   <Mail className="w-6 h-6" />
                 </a>
                 <a
-                  href="tel:+12526787959"
+                  href="tel:+14372210664"
                   className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl hover:scale-110 transition-transform"
                 >
                   <Phone className="w-6 h-6" />
@@ -143,20 +143,24 @@ function MainContent() {
                   <div className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
                     <Mail className="w-5 h-5 text-blue-600" />
                   </div>
-                  <span>mbabazielroy@yahoo.com</span>
+                  <a href="mailto:mbabazielroy@yahoo.com" className="hover:text-blue-600">
+                    mbabazielroy@yahoo.com
+                  </a>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
                     <Phone className="w-5 h-5 text-blue-600" />
                   </div>
-                  <span>+1 (253) 678-7959</span>
+                  <a href="tel:+14372210664" className="hover:text-blue-600">
+                    +1 (437) 221-0664
+                  </a>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
                     <Github className="w-5 h-5 text-blue-600" />
                   </div>
                   <a href="https://github.com/mbabazielroy" className="hover:text-blue-600">
-                    github.com/username
+                    github.com/mbabazielroy
                   </a>
                 </div>
                 <div className="flex items-center gap-4">
@@ -164,7 +168,7 @@ function MainContent() {
                     <Linkedin className="w-5 h-5 text-blue-600" />
                   </div>
                   <a href="https://www.linkedin.com/in/elroy-mbabazi/" className="hover:text-blue-600">
-                    linkedin.com/in/username
+                    linkedin.com/in/elroy-mbabazi/
                   </a>
                 </div>
               </div>

@@ -1,6 +1,18 @@
+
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import ThemeToggle from './ThemeToggle';
+
+function handleNavClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string) {
+  if (href.startsWith('#')) {
+    e.preventDefault();
+    const id = href.replace('#', '');
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+}
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,6 +41,7 @@ export default function Navbar() {
                   key={item.href}
                   href={item.href}
                   className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  onClick={e => handleNavClick(e, item.href)}
                 >
                   {item.label}
                 </a>
@@ -58,7 +71,10 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                onClick={() => setIsOpen(false)}
+                onClick={e => {
+                  handleNavClick(e, item.href);
+                  setIsOpen(false);
+                }}
               >
                 {item.label}
               </a>

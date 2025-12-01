@@ -1,6 +1,18 @@
 import { ArrowRight } from 'lucide-react';
+import type { MouseEvent } from 'react';
 
 export default function Hero() {
+  const handleScroll = (
+    e: MouseEvent<HTMLAnchorElement>,
+    targetId: string
+  ) => {
+    e.preventDefault();
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="hero" className="pt-20 min-h-screen flex items-center relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800 -z-10" />
@@ -19,6 +31,7 @@ export default function Hero() {
             <div className="flex flex-wrap gap-4">
               <a
                 href="#contact"
+                onClick={(e) => handleScroll(e, 'contact')}
                 className="group bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-8 py-4 rounded-2xl font-medium inline-flex items-center gap-2 hover:scale-105 transition-all duration-200"
               >
                 Contact Me
@@ -26,6 +39,7 @@ export default function Hero() {
               </a>
               <a
                 href="#projects"
+                onClick={(e) => handleScroll(e, 'projects')}
                 className="group px-8 py-4 rounded-2xl font-medium inline-flex items-center gap-2 bg-white dark:bg-gray-800 hover:scale-105 transition-all duration-200 border border-gray-200 dark:border-gray-700"
               >
                 View Projects
