@@ -10,13 +10,21 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const technologies = project.technologies || project.tags || [];
   const githubUrl = project.githubUrl || project.github || '';
   const liveUrl = project.liveUrl || project.demo || '';
+  const fallbackImage = 'https://images.unsplash.com/photo-1504272017915-28c4bc1d4f59?auto=format&fit=crop&q=80&w=1600';
 
   return (
     <div className="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-200">
       <div className="relative overflow-hidden">
         <img
           src={project.image}
-          alt={project.title}
+          alt={`${project.title} preview`}
+          loading="lazy"
+          decoding="async"
+          onError={(e) => {
+            if (e.currentTarget.src !== fallbackImage) {
+              e.currentTarget.src = fallbackImage;
+            }
+          }}
           className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-200"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
@@ -42,6 +50,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`View code for ${project.title}`}
               className="flex items-center text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
             >
               <Github className="mr-1" size={16} />
@@ -53,6 +62,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               href={liveUrl}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`View live demo of ${project.title}`}
               className="flex items-center text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
             >
               <Link className="mr-1" size={16} />

@@ -12,8 +12,8 @@ const app = express();
 // Middleware
 app.use(cors({
   origin: process.env.FRONTEND_URL || '*', // Allow requests from the frontend
-  methods: ['GET', 'POST'],
-  credentials: true
+  methods: ['GET', 'POST', 'OPTIONS'],
+  credentials: false
 }));
 app.use(express.json());
 
@@ -156,6 +156,41 @@ app.post('/api/recommendations', async (req, res) => {
       error: 'Failed to generate recommendations',
       message: error.message
     });
+  }
+});
+
+// Proxy endpoint for local LLM (Ollama or compatible)
+app.post('/api/llm', async (req, res) => {
+  const { messages, model } = req.body || {};
+  const targetModel = model || process.env.LLM_MODEL || 'qwen2.5:0.5b';
+  const llmUrl = process.env.LLM_URL || 'http://localhost:11434/api/chat';
+
+  if (!messages || !Array.isArray(messages)) {
+    return res.status(400).json({ error: 'messages array required' });
+  }
+
+  try {
+    const response = await fetch(llmUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: targetModel,
+        messages,
+        stream: false
+      })
+    });
+
+    if (!response.ok) {
+      const text = await response.text();
+      throw new Error(`LLM error ${response.status}: ${text}`);
+    }
+
+    const data = await response.json();
+    const content = data?.message?.content || data?.choices?.[0]?.message?.content;
+    return res.json({ content, model: targetModel });
+  } catch (err) {
+    console.error('LLM proxy error:', err.message);
+    return res.status(500).json({ error: 'LLM proxy failed', details: err.message });
   }
 });
 

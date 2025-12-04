@@ -9,6 +9,14 @@ export default defineConfig({
             gzipSize: true,
             brotliSize: true,
         })],
+    server: {
+        proxy: {
+            '/api': {
+                target: 'http://localhost:3001',
+                changeOrigin: true,
+            },
+        },
+    },
     build: {
         rollupOptions: {
             output: {

@@ -9,13 +9,14 @@ import {
   Server
 } from 'lucide-react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useMemo, useState } from 'react';
 import EducationCard from './components/EducationCard';
 import Navbar from './components/Navbar';
 import SectionHeading from './components/SectionHeading';
 import SkillCard from './components/SkillCard';
 import { education, projects } from './data';
 import ChatBot from './components/ChatBot';
+import BackToTopButton from './components/BackToTopButton';
 
 const skills = [
   { name: 'Frontend Development', icon: <FileCode className="w-6 h-6" /> },
@@ -30,6 +31,25 @@ const HeroLazy = lazy(() => import('./components/Hero'));
 const ProjectCardLazy = lazy(() => import('./components/ProjectCard'));
 
 function MainContent() {
+  const [activeTech, setActiveTech] = useState<string>('All');
+
+  const techOptions = useMemo(() => {
+    const techSet = new Set<string>();
+    projects.forEach((project) => {
+      const stack = project.technologies || project.tags || [];
+      stack.forEach((tech) => techSet.add(tech));
+    });
+    return ['All', ...Array.from(techSet).sort()];
+  }, []);
+
+  const filteredProjects = useMemo(() => {
+    if (activeTech === 'All') return projects;
+    return projects.filter((project) => {
+      const stack = project.technologies || project.tags || [];
+      return stack.includes(activeTech);
+    });
+  }, [activeTech]);
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       <Navbar />
@@ -47,15 +67,16 @@ function MainContent() {
           <div className="grid lg:grid-cols-2 gap-12">
             <div className="space-y-6">
               <p className="text-lg text-gray-600 dark:text-gray-400">
-                I am a senior Computer Science student at the University of Washington
-                with a minor in Mathematics. My journey in technology has equipped me
-                with strong programming skills in Python, Java, C, C++, and web
-                technologies.
+                I am a Computer Science graduate from the University of Washington
+                with a minor in Mathematics, actively seeking full-time roles. I build
+                reliable end-to-end products across Python, Java, C/C++, and modern
+                web stacks, with experience shipping to production and supporting users.
               </p>
               <p className="text-lg text-gray-600 dark:text-gray-400">
-                Through my academic journey across different continents, I've developed
-                a unique perspective and adaptability that enhances my problem-solving
-                abilities.
+                Having studied and worked across different continents, I bring a
+                collaborative mindset, clear communication, and strong problem-solving
+                skills. I thrive in teams that care about impact, quality, and fast
+                iteration.
               </p>
               <div className="flex gap-6">
                 <a
@@ -115,13 +136,38 @@ function MainContent() {
             title="Projects"
             subtitle="Some of my recent work"
           />
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <Suspense key={index} fallback={<div>Loading...</div>}>
-                <ProjectCardLazy key={index} project={project} />
-              </Suspense>
-            ))}
+          <div className="flex flex-wrap gap-3 mb-8">
+            {techOptions.map((tech) => {
+              const isActive = activeTech === tech;
+              return (
+                <button
+                  key={tech}
+                  onClick={() => setActiveTech(tech)}
+                  aria-pressed={isActive}
+                  className={`px-4 py-2 rounded-full border text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'bg-blue-600 text-white border-blue-600'
+                      : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border-gray-300 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-700'
+                  }`}
+                >
+                  {tech}
+                </button>
+              );
+            })}
           </div>
+          {filteredProjects.length === 0 ? (
+            <p className="text-gray-600 dark:text-gray-400">
+              No projects match that technology yet. Try a different filter.
+            </p>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredProjects.map((project, index) => (
+                <Suspense key={index} fallback={<div>Loading...</div>}>
+                  <ProjectCardLazy key={index} project={project} />
+                </Suspense>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -183,6 +229,8 @@ function MainContent() {
           <p>&copy; {new Date().getFullYear()} Elroy Mbabazi. All rights reserved.</p>
         </div>
       </footer>
+
+      <BackToTopButton />
     </div>
   );
 }

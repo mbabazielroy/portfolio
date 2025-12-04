@@ -26,7 +26,7 @@ export default function AdminMessages() {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Login error:', error);
       setError('Invalid email or password');
     }

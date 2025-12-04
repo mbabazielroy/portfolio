@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { db, auth } from '../firebase';
-import { collection, query, orderBy, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { collection, query, orderBy, getDocs, updateDoc, doc, Timestamp } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { CheckCircle, Mail} from 'lucide-react';
 
@@ -9,7 +9,7 @@ interface Message {
   name: string;
   email: string;
   message: string;
-  timestamp: any;
+  timestamp?: Timestamp;
   status: 'read' | 'unread';
 }
 
@@ -37,13 +37,13 @@ export default function MessageList() {
     try {
       const q = query(collection(db, 'messages'), orderBy('timestamp', 'desc'));
       const querySnapshot = await getDocs(q);
-      const messageList = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
+      const messageList = querySnapshot.docs.map((docSnap) => ({
+        id: docSnap.id,
+        ...docSnap.data(),
       })) as Message[];
       setMessages(messageList);
       setError(null);
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error fetching messages:', error);
       setError('Failed to fetch messages. Please try again later.');
     } finally {
@@ -66,7 +66,7 @@ export default function MessageList() {
       setMessages(messages.map(msg =>
         msg.id === messageId ? { ...msg, status: 'read' } : msg
       ));
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error marking message as read:', error);
       setError('Failed to mark message as read.');
     }

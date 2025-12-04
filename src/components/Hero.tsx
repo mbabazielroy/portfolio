@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import type { MouseEvent } from 'react';
 
 export default function Hero() {
@@ -25,8 +25,22 @@ export default function Hero() {
                 Hi, I'm Elroy Mbabazi
               </h1>
               <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400">
-                Computer Science Senior at University of Washington
+                I build end-to-end products with modern web, mobile, and AI tooling.
               </p>
+              <div className="grid sm:grid-cols-2 gap-3 text-gray-700 dark:text-gray-300">
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-blue-600" />
+                  <span>Full-stack (Next.js, Firebase, Prisma) delivery.</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-blue-600" />
+                  <span>AI-assisted flows: OpenAI integrations and assistants.</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-blue-600" />
+                  <span>Mobile experience with Expo/React Native.</span>
+                </div>
+              </div>
             </div>
             <div className="flex flex-wrap gap-4">
               <a
@@ -43,6 +57,13 @@ export default function Hero() {
                 className="group px-8 py-4 rounded-2xl font-medium inline-flex items-center gap-2 bg-white dark:bg-gray-800 hover:scale-105 transition-all duration-200 border border-gray-200 dark:border-gray-700"
               >
                 View Projects
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a
+                href="mailto:mbabazielroy@yahoo.com?subject=Resume%20Request"
+                className="group px-8 py-4 rounded-2xl font-medium inline-flex items-center gap-2 bg-white/80 dark:bg-gray-900 hover:scale-105 transition-all duration-200 border border-gray-200 dark:border-gray-700"
+              >
+                Get Resume
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>

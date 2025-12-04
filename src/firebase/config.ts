@@ -10,21 +10,21 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 
-export const addDocument = async (collectionName: string, data: any) => {
+export const addDocument = async (collectionName: string, data: Record<string, unknown>) => {
   try {
     const docRef = await addDoc(collection(db, collectionName), data);
     return docRef;
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error adding document: ", error);
     throw error;
   }
 };
 
-export const getDocuments = async (collectionName: string) => {
+export const getDocuments = async <T = Record<string, unknown>>(collectionName: string) => {
   try {
     const querySnapshot = await getDocs(collection(db, collectionName));
-    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  } catch (error) {
+    return querySnapshot.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() })) as T[];
+  } catch (error: unknown) {
     console.error("Error getting documents: ", error);
     throw error;
   }

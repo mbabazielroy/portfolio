@@ -59,7 +59,7 @@ export default function ContactForm() {
             message: 'Message sent successfully! I will get back to you soon.',
           });
           setFormData({ name: '', email: '', message: '' });
-        } catch (firebaseError) {
+        } catch (firebaseError: unknown) {
           console.error('Failed to store message:', firebaseError);
           // Still show success since email was sent
           setSubmitStatus({
@@ -71,11 +71,11 @@ export default function ContactForm() {
       } else {
         throw new Error('Failed to send email');
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Failed to send email:', error);
       setSubmitStatus({
         type: 'error',
-        message: error?.text || 'Failed to send message. Please try again later.',
+        message: 'Failed to send message. Please try again later.',
       });
     } finally {
       setIsSubmitting(false);
