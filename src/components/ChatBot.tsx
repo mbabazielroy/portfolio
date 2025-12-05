@@ -290,7 +290,8 @@ export default function ChatBot({ projects }: { projects: Project[] }) {
       {isOpen && (
         <div className="fixed bottom-4 right-4 w-[420px] max-w-[calc(100vw-24px)] h-[540px] bg-white dark:bg-gray-900 rounded-2xl shadow-2xl flex flex-col z-50 border border-gray-200 dark:border-gray-800 overflow-hidden">
           {/* Header */}
-          <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-800 bg-gradient-to-r from-blue-600 to-indigo-600 text-white flex items-center justify-between">
+          <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-800 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white flex items-center justify-between relative overflow-hidden">
+            <div className="absolute inset-0 bg-grid-slate opacity-10 pointer-events-none" />
             <div>
               <div className="flex items-center gap-2">
                 <Sparkles size={18} />
@@ -301,7 +302,7 @@ export default function ChatBot({ projects }: { projects: Project[] }) {
             <div className="flex items-center gap-2">
               <button
                 onClick={handleClear}
-                className="text-xs px-2 py-1 bg-white/10 rounded hover:bg-white/20 transition"
+                className="text-xs px-2 py-1 bg-white/15 rounded hover:bg-white/25 transition"
               >
                 New chat
               </button>

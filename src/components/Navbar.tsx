@@ -26,7 +26,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm z-50">
+    <nav className="fixed w-full bg-white/75 dark:bg-gray-900/70 backdrop-blur-lg border-b border-white/40 dark:border-gray-800/60 shadow-sm z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
@@ -41,7 +41,7 @@ export default function Navbar() {
                 <a
                   key={item.href}
                   href={item.href}
-                  className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  className="relative text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-0.5 after:scale-x-0 hover:after:scale-x-100 after:origin-center after:transition-transform after:bg-gradient-to-r after:from-blue-500 after:to-indigo-500"
                   onClick={e => handleNavClick(e, item.href)}
                 >
                   {item.label}

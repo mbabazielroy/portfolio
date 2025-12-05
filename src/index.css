@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --accent: #2563eb;
+    --accent-2: #7c3aed;
+    --glow: rgba(37, 99, 235, 0.2);
+  }
+}
+
+@layer utilities {
+  .bg-grid-slate {
+    background-image: radial-gradient(circle at 1px 1px, rgba(15, 23, 42, 0.08) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+  .bg-glow {
+    background: radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.18), transparent 30%),
+      radial-gradient(circle at 80% 10%, rgba(124, 58, 237, 0.14), transparent 28%),
+      radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.12), transparent 30%);
+  }
+}
