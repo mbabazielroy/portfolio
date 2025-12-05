@@ -17,7 +17,7 @@ export default function ChatBot({ projects }: { projects: Project[] }) {
   const STORAGE_KEY = 'chat_messages_v1';
   const makeDefaultBotMessage = (): Message => ({
     id: 'intro',
-    text: "Hi there! I'm your project guide. Tell me what you're looking for (e.g., frontend, backend, AI/ML, mobile, deployed apps), and I'll suggest matching projects with links.",
+    text: "Hey, I'm Elroy's assistant. Want to see projects, scope a build, or get career feedback? Tell me a goal (e.g., hire me, build a web app, review portfolio) and I'll tailor the next steps.",
     sender: 'bot',
     timestamp: new Date(),
   });
@@ -242,13 +242,13 @@ export default function ChatBot({ projects }: { projects: Project[] }) {
   const personaIntro = (mode: Persona) => {
     switch (mode) {
       case 'recruiter':
-        return "Recruiter mode on. I can help review your portfolio, discuss roles, and suggest how to position your experience. What roles or locations are you targeting?";
+        return "Recruiter mode on. I can review fit, summarize experience, and surface relevant projects. What roles and locations are you hiring for?";
       case 'engineer':
-        return "Engineer mode on. I can talk through architecture, code, performance, or stack choices. What technical problem are you thinking about?";
+        return "Engineer mode on. We can talk architecture, stack choices, performance, or delivery plan. What's the problem or feature you're scoping?";
       case 'founder':
-        return "Founder mode on. Let's talk product strategy, go-to-market, and MVP scope. What's your product idea or target audience?";
+        return "Founder mode on. Let's shape an MVP, GTM, and milestones. What's the product idea, audience, and goal for the next 4 weeks?";
       default:
-        return 'Assistant mode. Tell me what you need: projects, strategy, or technical guidance.';
+        return 'Assistant mode. Tell me if you want projects, to scope a build, or career feedback and I’ll tailor next steps.';
     }
   };
 

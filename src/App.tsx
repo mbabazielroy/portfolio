@@ -11,10 +11,11 @@ import {
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { Suspense, lazy, useMemo, useState } from 'react';
 import EducationCard from './components/EducationCard';
+import ExperienceCard from './components/ExperienceCard';
 import Navbar from './components/Navbar';
 import SectionHeading from './components/SectionHeading';
 import SkillCard from './components/SkillCard';
-import { education, projects } from './data';
+import { education, experience, projects } from './data';
 import ChatBot from './components/ChatBot';
 import BackToTopButton from './components/BackToTopButton';
 
@@ -31,24 +32,42 @@ const HeroLazy = lazy(() => import('./components/Hero'));
 const ProjectCardLazy = lazy(() => import('./components/ProjectCard'));
 
 function MainContent() {
-  const [activeTech, setActiveTech] = useState<string>('All');
+  const [sortOption, setSortOption] = useState<string>('live');
+  const [activeExperienceTag, setActiveExperienceTag] = useState<string>('All');
 
-  const techOptions = useMemo(() => {
-    const techSet = new Set<string>();
-    projects.forEach((project) => {
-      const stack = project.technologies || project.tags || [];
-      stack.forEach((tech) => techSet.add(tech));
+  const experienceTags = useMemo(() => {
+    const tagSet = new Set<string>();
+    experience.forEach((exp) => {
+      exp.tags?.forEach((t) => tagSet.add(t));
     });
-    return ['All', ...Array.from(techSet).sort()];
+    return ['All', ...Array.from(tagSet).sort()];
   }, []);
 
-  const filteredProjects = useMemo(() => {
-    if (activeTech === 'All') return projects;
-    return projects.filter((project) => {
-      const stack = project.technologies || project.tags || [];
-      return stack.includes(activeTech);
+  const featuredProjects = useMemo(() => {
+    const withLive = projects.filter((p) => p.liveUrl);
+    return withLive.length ? withLive.slice(0, 3) : projects.slice(0, 3);
+  }, []);
+
+  const filteredExperience = useMemo(() => {
+    if (activeExperienceTag === 'All') return experience;
+    return experience.filter((exp) => exp.tags?.includes(activeExperienceTag));
+  }, [activeExperienceTag]);
+
+  const orderedProjects = useMemo(() => {
+    const base = projects.filter((p) => !featuredProjects.find((f) => f.title === p.title));
+    const sorted = [...base].sort((a, b) => {
+      if (sortOption === 'live') {
+        const aLive = a.liveUrl ? 1 : 0;
+        const bLive = b.liveUrl ? 1 : 0;
+        if (aLive !== bLive) return bLive - aLive;
+        return a.title.localeCompare(b.title);
+      }
+      if (sortOption === 'az') return a.title.localeCompare(b.title);
+      if (sortOption === 'za') return b.title.localeCompare(a.title);
+      return 0;
     });
-  }, [activeTech]);
+    return sorted;
+  }, [featuredProjects, sortOption]);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
@@ -129,6 +148,75 @@ function MainContent() {
         </div>
       </section>
 
+      {/* How I Work & Testimonials */}
+      <section id="how-i-work" className="py-20 bg-gray-100 dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            title="How I Work"
+            subtitle="Process, communication, and what to expect"
+          />
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm space-y-4">
+              <h4 className="text-lg font-bold text-gray-900 dark:text-white">Process</h4>
+              <ul className="space-y-3 text-sm text-gray-700 dark:text-gray-300 list-disc pl-5">
+                <li>Discovery → define scope, goals, timeline, and success criteria.</li>
+                <li>Plan → architecture, milestones, and risk/assumption log.</li>
+                <li>Build → iterative delivery with demos and async updates.</li>
+                <li>Launch → handoff, docs, and light training if needed.</li>
+              </ul>
+            </div>
+            <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm space-y-4">
+              <h4 className="text-lg font-bold text-gray-900 dark:text-white">Testimonials & Trust</h4>
+              <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
+                <p className="border-l-4 border-blue-500 pl-3">
+                  “Clear communication, fast iterations, and reliable delivery on our web app.” — Small business client
+                </p>
+                <p className="border-l-4 border-blue-500 pl-3">
+                  “Collaborative and thoughtful, especially around stakeholder needs and reporting.” — Campus leadership
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  References available on request. Happy to share more context in a call.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Experience Section */}
+      <section id="experience" className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            title="Experience"
+            subtitle="Where I've applied my skills and delivered outcomes"
+          />
+          <div className="flex flex-wrap gap-2 mb-6">
+            {experienceTags.map((tag) => {
+              const isActive = activeExperienceTag === tag;
+              return (
+                <button
+                  key={tag}
+                  onClick={() => setActiveExperienceTag(tag)}
+                  aria-pressed={isActive}
+                  className={`px-3 py-1.5 rounded-full border text-xs font-semibold transition-colors ${
+                    isActive
+                      ? 'bg-blue-600 text-white border-blue-600'
+                      : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border-gray-300 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-700'
+                  }`}
+                >
+                  {tag}
+                </button>
+              );
+            })}
+          </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            {filteredExperience.map((exp, index) => (
+              <ExperienceCard key={index} experience={exp} />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Projects Section */}
       <section id="projects" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -136,34 +224,45 @@ function MainContent() {
             title="Projects"
             subtitle="Some of my recent work"
           />
-          <div className="flex flex-wrap gap-3 mb-8">
-            {techOptions.map((tech) => {
-              const isActive = activeTech === tech;
-              return (
-                <button
-                  key={tech}
-                  onClick={() => setActiveTech(tech)}
-                  aria-pressed={isActive}
-                  className={`px-4 py-2 rounded-full border text-sm font-medium transition-colors ${
-                    isActive
-                      ? 'bg-blue-600 text-white border-blue-600'
-                      : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border-gray-300 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-700'
-                  }`}
-                >
-                  {tech}
-                </button>
-              );
-            })}
+          <div className="flex items-center gap-3 mb-6">
+            <label className="text-sm text-gray-600 dark:text-gray-400" htmlFor="sort-projects">
+              Sort by
+            </label>
+            <select
+              id="sort-projects"
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value)}
+              className="px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="live">Live demos first</option>
+              <option value="az">Alphabetical A–Z</option>
+              <option value="za">Alphabetical Z–A</option>
+            </select>
           </div>
-          {filteredProjects.length === 0 ? (
+          {sortOption === 'live' && (
+            <div className="mb-10">
+              <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Featured</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Live and polished builds you can click through.</p>
+              </div>
+              <div className="grid md:grid-cols-3 gap-6">
+                {featuredProjects.map((project, index) => (
+                  <Suspense key={`featured-${index}`} fallback={<div>Loading...</div>}>
+                    <ProjectCardLazy project={project} />
+                  </Suspense>
+                ))}
+              </div>
+            </div>
+          )}
+          {orderedProjects.length === 0 ? (
             <p className="text-gray-600 dark:text-gray-400">
               No projects match that technology yet. Try a different filter.
             </p>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProjects.map((project, index) => (
-                <Suspense key={index} fallback={<div>Loading...</div>}>
-                  <ProjectCardLazy key={index} project={project} />
+              {orderedProjects.map((project) => (
+                <Suspense key={project.title} fallback={<div>Loading...</div>}>
+                  <ProjectCardLazy project={project} />
                 </Suspense>
               ))}
             </div>

@@ -1,4 +1,4 @@
-import type { Education, Project } from '../types';
+import type { Education, Experience, Project } from '../types';
 
 export const education: Education[] = [
   {
@@ -28,6 +28,74 @@ export const education: Education[] = [
     location: "Wakiso, Uganda",
     period: "2019",
     image: "https://ayoma.co.ug/wp-content/uploads/2023/04/St.-Augustines-College-Wakiso-2.jpg.webp"
+  }
+];
+
+export const experience: Experience[] = [
+  {
+    title: "Freelance Full-Stack Developer",
+    company: "Self-employed",
+    location: "Remote",
+    period: "2023 - Present",
+    bullets: [
+      "Built and launched production web apps for small businesses, owning UX, frontend, backend, and deployment.",
+      "Integrated payment, auth, and analytics stacks to deliver end-to-end flows with clear dashboards for clients.",
+      "Scoped projects with stakeholders, translated goals into milestones, and shipped iteratively with fast feedback."
+    ],
+    tags: ["Engineering", "Product"],
+    technologies: ["React", "Next.js", "TypeScript", "TailwindCSS", "Firebase", "Node.js"]
+  },
+  {
+    title: "Software Engineering Projects",
+    company: "Academic & Personal",
+    location: "Tacoma, WA",
+    period: "2021 - 2023",
+    bullets: [
+      "Developed Java desktop apps (TicTacToe, Spreadsheet ADT, Budget Planner) with MVC patterns and automated tests.",
+      "Built Python ML/NLP projects (sentiment models, search algorithms) emphasizing clean data pipelines and evaluation.",
+      "Collaborated with peers on version control, code reviews, and documentation to deliver maintainable features."
+    ],
+    tags: ["Engineering"],
+    technologies: ["Java", "Python", "C/C++", "React", "Data Structures", "ML/NLP"]
+  },
+  {
+    title: "Student Vice President of Legislation",
+    company: "Tacoma Community College",
+    location: "Tacoma, WA",
+    period: "2020 - 2021",
+    bullets: [
+      "Represented student interests to college leadership; coordinated policy updates and campus feedback loops.",
+      "Led forums and surveys to surface student needs, summarizing findings into actionable recommendations.",
+      "Partnered with faculty and peers to improve engagement and transparency on key legislative priorities."
+    ],
+    tags: ["Leadership", "Policy"],
+    technologies: ["Leadership", "Stakeholder Management", "Public Speaking", "Policy Advocacy"]
+  },
+  {
+    title: "Student Vice President of Finance",
+    company: "Tacoma Community College",
+    location: "Tacoma, WA",
+    period: "2021 - 2022",
+    bullets: [
+      "Managed budgeting and allocation for student initiatives, improving clarity on spend and impact.",
+      "Introduced simple reporting cadences and dashboards to track usage and outcomes for funded programs.",
+      "Collaborated with student orgs to prioritize funds toward high-impact events and services."
+    ],
+    tags: ["Leadership", "Operations"],
+    technologies: ["Budgeting", "Financial Reporting", "Cross-team Collaboration", "Operations"]
+  },
+  {
+    title: "Research Assistant, Office of Equity, Inclusion & Diversity",
+    company: "University of Washington Tacoma",
+    location: "Tacoma, WA",
+    period: "2022 - 2023",
+    bullets: [
+      "Supported the Vice Chancellor’s office with qualitative and quantitative research on equity initiatives.",
+      "Compiled reports and presentations to surface findings to leadership and student groups.",
+      "Collaborated with cross-functional stakeholders to gather feedback and highlight gaps in inclusion efforts."
+    ],
+    tags: ["Research", "Equity"],
+    technologies: ["Research", "Data Analysis", "Reporting", "Stakeholder Engagement"]
   }
 ];
 

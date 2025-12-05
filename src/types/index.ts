@@ -6,6 +6,17 @@ export interface Education {
   image: string;
 }
 
+export interface Experience {
+  title: string;
+  company: string;
+  location: string;
+  period: string;
+  bullets: string[];
+  tags?: string[];
+  technologies?: string[];
+  link?: string;
+}
+
 export interface Project {
   title: string;
   description: string;
