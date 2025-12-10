@@ -160,37 +160,91 @@ app.post('/api/recommendations', async (req, res) => {
 });
 
 // Proxy endpoint for local LLM (Ollama or compatible)
+const fallbackOpenAIModel = process.env.OPENAI_LLM_MODEL || 'gpt-3.5-turbo';
+
+async function callOpenAI(messages) {
+  const response = await openai.chat.completions.create({
+    model: fallbackOpenAIModel,
+    messages,
+    temperature: 0.7,
+    max_tokens: 600,
+  });
+  const content = response?.choices?.[0]?.message?.content;
+  if (!content) {
+    throw new Error('OpenAI returned an empty response');
+  }
+  return content;
+}
+
 app.post('/api/llm', async (req, res) => {
   const { messages, model } = req.body || {};
   const targetModel = model || process.env.LLM_MODEL || 'qwen2.5:0.5b';
-  const llmUrl = process.env.LLM_URL || 'http://localhost:11434/api/chat';
+  const llmUrl = process.env.LLM_URL;
 
   if (!messages || !Array.isArray(messages)) {
     return res.status(400).json({ error: 'messages array required' });
   }
 
-  try {
-    const response = await fetch(llmUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: targetModel,
-        messages,
-        stream: false
-      })
-    });
+  if (llmUrl) {
+    try {
+      const authHeader = process.env.OLLAMA_API_KEY
+        ? { Authorization: `Bearer ${process.env.OLLAMA_API_KEY}` }
+        : {};
+      const headers = {
+        'Content-Type': 'application/json',
+        ...authHeader,
+      };
+      const response = await fetch(llmUrl, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+          model: targetModel,
+          messages,
+          stream: false
+        })
+      });
 
-    if (!response.ok) {
-      const text = await response.text();
-      throw new Error(`LLM error ${response.status}: ${text}`);
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`LLM error ${response.status}: ${text}`);
+      }
+
+      const data = await response.json();
+      const content = data?.message?.content || data?.choices?.[0]?.message?.content;
+      return res.json({ content, model: targetModel, source: 'proxy' });
+    } catch (err) {
+      console.error('LLM proxy error:', err.message);
+      if (process.env.OPENAI_API_KEY) {
+        try {
+          const content = await callOpenAI(messages);
+          return res.json({ content, model: fallbackOpenAIModel, source: 'openai-fallback' });
+        } catch (fallbackErr) {
+          console.error('OpenAI fallback error:', fallbackErr.message);
+          return res.status(502).json({
+            error: 'LLM proxy failed',
+            details: err.message,
+          });
+        }
+      }
+      return res.status(502).json({
+        error: 'LLM proxy failed',
+        details: err.message,
+      });
     }
+  }
 
-    const data = await response.json();
-    const content = data?.message?.content || data?.choices?.[0]?.message?.content;
-    return res.json({ content, model: targetModel });
+  if (!process.env.OPENAI_API_KEY) {
+    return res.status(503).json({
+      error: 'LLM_URL or OPENAI_API_KEY must be configured on the server to answer chat requests.',
+    });
+  }
+
+  try {
+    const content = await callOpenAI(messages);
+    return res.json({ content, model: fallbackOpenAIModel, source: 'openai' });
   } catch (err) {
-    console.error('LLM proxy error:', err.message);
-    return res.status(500).json({ error: 'LLM proxy failed', details: err.message });
+    console.error('OpenAI chat error:', err.message);
+    return res.status(502).json({ error: 'OpenAI request failed', details: err.message });
   }
 });
 

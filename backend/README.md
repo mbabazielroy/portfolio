@@ -48,3 +48,24 @@ Generates project recommendations based on user query and available projects.
   "recommendation": "Based on your interest in React and TypeScript, I recommend checking out **Project Title**..."
 }
 ```
+
+## LLM proxy configuration
+
+The `/api/llm` endpoint proxies chat requests to your chosen LLM service and now automatically falls back to OpenAI when that service is unreachable.
+
+### Environment variables
+
+- `LLM_URL`: public HTTPS URL of your self-hosted Ollama (or compatible) server, e.g. `https://ollama.example.com/api/chat`. When provided, `/api/llm` forwards messages to that address.
+- `OLLAMA_API_KEY` (optional): put the Ollama Cloud key here so the proxy can send it as `Authorization: Bearer …`. Only set this if your endpoint requires the key.
+- `OPENAI_API_KEY`: keeps chat working when Ollama is offline; the proxy retries against OpenAI with this key after the Ollama proxy request fails.
+- `OPENAI_LLM_MODEL`: optional override for the OpenAI fallback model (defaults to `gpt-3.5-turbo`).
+
+### Hosting Ollama remotely
+
+1. Run Ollama on a machine you control (cloud VM, VPS, etc.) and expose it via HTTPS (`https://your-domain/api/chat`).
+2. Set `LLM_URL` in the backend environment (local `.env` for development and Vercel's Environment Variables for production) to that `/api/chat` endpoint.
+3. Keep `OPENAI_API_KEY` configured so the backend can continue serving chats when Ollama is unavailable, and optionally tune `OPENAI_LLM_MODEL`.
+
+### Vercel recommendation deployment
+
+Set `LLM_URL`, `OPENAI_API_KEY`, and (if desired) `OPENAI_LLM_MODEL` on Vercel. The frontend already points at `/api/llm` (`VITE_LLM_URL=/api/llm`), so no other client-side changes are needed.
