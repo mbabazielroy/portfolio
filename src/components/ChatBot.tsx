@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Mail, X as XIcon, RefreshCw, Sparkles } from 'lucide-react';
 import { getLocalRecommendations, type RecommendationItem, type Persona } from '../services/recommender';
-import { chatWithLocalLLM } from '../services/localLLM';
+import { chatWithOpenAI } from '../services/openAIChat';
 import type { Project } from '../types';
 
 type Message = {
@@ -116,7 +116,7 @@ export default function ChatBot({ projects }: { projects: Project[] }) {
         timestamp: new Date()
       }]);
       try {
-        const llmReply = await chatWithLocalLLM(persona, toChatHistory([...messages, userMessage]), projects);
+        const llmReply = await chatWithOpenAI(persona, toChatHistory([...messages, userMessage]), projects);
         setMessages(prev => prev.filter(msg => msg.id !== loadingId));
         setMessages(prev => [...prev, {
           id: Date.now().toString(),
@@ -126,7 +126,7 @@ export default function ChatBot({ projects }: { projects: Project[] }) {
           status: 'ok'
         }]);
       } catch (error) {
-        console.error("LLM chat error:", error);
+        console.error("OpenAI chat error:", error);
         setMessages(prev => prev.filter(msg => msg.id !== loadingId));
         setMessages(prev => [...prev, {
           id: Date.now().toString(),

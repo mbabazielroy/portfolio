@@ -159,7 +159,6 @@ app.post('/api/recommendations', async (req, res) => {
   }
 });
 
-// Proxy endpoint for local LLM (Ollama or compatible)
 const fallbackOpenAIModel = process.env.OPENAI_LLM_MODEL || 'gpt-3.5-turbo';
 
 async function callOpenAI(messages) {
@@ -177,15 +176,12 @@ async function callOpenAI(messages) {
 }
 
 app.post('/api/llm', async (req, res) => {
-  const { messages, model } = req.body || {};
-  const targetModel = model || process.env.LLM_MODEL || 'qwen2.5:0.5b';
-  // const llmUrl = process.env.LLM_URL; // Disabled to force OpenAI path
+  const { messages } = req.body || {};
 
   if (!messages || !Array.isArray(messages)) {
     return res.status(400).json({ error: 'messages array required' });
   }
 
-  // Ollama proxy logic is skipped when we always call OpenAI below.
   if (!process.env.OPENAI_API_KEY) {
     return res.status(503).json({
       error: 'OPENAI_API_KEY must be configured on the server to answer chat requests.',

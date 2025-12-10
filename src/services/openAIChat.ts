@@ -6,8 +6,8 @@ type ChatMessage = {
   content: string;
 };
 
-const DEFAULT_URL = import.meta.env.VITE_LLM_URL || '/api/llm';
-const DEFAULT_MODEL = import.meta.env.VITE_LLM_MODEL || 'qwen2.5:0.5b';
+const DEFAULT_URL = import.meta.env.VITE_OPENAI_URL || '/api/llm';
+const DEFAULT_MODEL = import.meta.env.VITE_OPENAI_MODEL || 'gpt-3.5-turbo';
 
 function buildSystemPrompt(persona: Persona, projects: Project[]): string {
   const personaInstructions: Record<Persona, string> = {
@@ -31,7 +31,7 @@ function buildSystemPrompt(persona: Persona, projects: Project[]): string {
   ].join(' ');
 }
 
-export async function chatWithLocalLLM(
+export async function chatWithOpenAI(
   persona: Persona,
   history: ChatMessage[],
   projects: Project[]
@@ -56,21 +56,21 @@ export async function chatWithLocalLLM(
     });
 
     if (!response.ok) {
-      throw new Error(`Local LLM responded with status ${response.status}`);
+      throw new Error(`OpenAI proxy responded with status ${response.status}`);
     }
 
     const data = await response.json();
-    // Handle both proxy shape { content } and Ollama shape { message: { content } }
+    // Handle both proxy shape { content } and typical OpenAI response shapes
     const content =
       data?.content ??
       data?.message?.content ??
       data?.choices?.[0]?.message?.content;
     if (!content) {
-      throw new Error('Empty response from local LLM');
+      throw new Error('Empty response from OpenAI proxy');
     }
     return content;
   } catch (error) {
-    console.error('Local LLM error:', error);
-    return 'I had trouble contacting the local model. Please ask again or check the local LLM server.';
+    console.error('OpenAI chat error:', error);
+    return 'I had trouble contacting the OpenAI chat service. Please try again shortly.';
   }
 }
