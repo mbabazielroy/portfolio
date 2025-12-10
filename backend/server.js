@@ -179,63 +179,16 @@ async function callOpenAI(messages) {
 app.post('/api/llm', async (req, res) => {
   const { messages, model } = req.body || {};
   const targetModel = model || process.env.LLM_MODEL || 'qwen2.5:0.5b';
-  const llmUrl = process.env.LLM_URL;
+  // const llmUrl = process.env.LLM_URL; // Disabled to force OpenAI path
 
   if (!messages || !Array.isArray(messages)) {
     return res.status(400).json({ error: 'messages array required' });
   }
 
-  if (llmUrl) {
-    try {
-      const authHeader = process.env.OLLAMA_API_KEY
-        ? { Authorization: `Bearer ${process.env.OLLAMA_API_KEY}` }
-        : {};
-      const headers = {
-        'Content-Type': 'application/json',
-        ...authHeader,
-      };
-      const response = await fetch(llmUrl, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({
-          model: targetModel,
-          messages,
-          stream: false
-        })
-      });
-
-      if (!response.ok) {
-        const text = await response.text();
-        throw new Error(`LLM error ${response.status}: ${text}`);
-      }
-
-      const data = await response.json();
-      const content = data?.message?.content || data?.choices?.[0]?.message?.content;
-      return res.json({ content, model: targetModel, source: 'proxy' });
-    } catch (err) {
-      console.error('LLM proxy error:', err.message);
-      if (process.env.OPENAI_API_KEY) {
-        try {
-          const content = await callOpenAI(messages);
-          return res.json({ content, model: fallbackOpenAIModel, source: 'openai-fallback' });
-        } catch (fallbackErr) {
-          console.error('OpenAI fallback error:', fallbackErr.message);
-          return res.status(502).json({
-            error: 'LLM proxy failed',
-            details: err.message,
-          });
-        }
-      }
-      return res.status(502).json({
-        error: 'LLM proxy failed',
-        details: err.message,
-      });
-    }
-  }
-
+  // Ollama proxy logic is skipped when we always call OpenAI below.
   if (!process.env.OPENAI_API_KEY) {
     return res.status(503).json({
-      error: 'LLM_URL or OPENAI_API_KEY must be configured on the server to answer chat requests.',
+      error: 'OPENAI_API_KEY must be configured on the server to answer chat requests.',
     });
   }
 
