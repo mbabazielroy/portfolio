@@ -122,7 +122,7 @@ export const projects: Project[] = [
     technologies: ["Java"],
     githubUrl: "https://github.com/mbabazielroy/Paint-Manager",
     liveUrl: "",
-    image: "https://images.unsplash.com/photo-1503389152951-9f343605f61e?auto=format&fit=crop&q=80&w=1600"
+    image: "/paintmanger.png"
   },
   {
     title: "AI Travel Planner",
@@ -170,7 +170,7 @@ export const projects: Project[] = [
     technologies: ["Python", "NLP"],
     githubUrl: "https://github.com/mbabazielroy/Naive_SA",
     liveUrl: "",
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=1600"
+    image: "/NSA.png"
   },
   {
     title: "Multi-Channel CNN Sentiment",
@@ -186,7 +186,7 @@ export const projects: Project[] = [
     technologies: ["Java", "Data Structures"],
     githubUrl: "https://github.com/mbabazielroy/Spreadsheet-ADT-master",
     liveUrl: "",
-    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=1600"
+    image: "/SpreadsheetADT.png"
   },
   {
     title: "Student Budget Planner",

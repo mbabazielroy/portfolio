@@ -37,18 +37,18 @@ const keywordHints: Record<string, string[]> = {
   deployed: ['live', 'demo', 'deployed', 'production'],
 };
 
-function detectPersona(tokens: string[]): string {
+function detectPersona(tokens: string[]): Persona | undefined {
   const tokenSet = new Set(tokens);
   if (['recruiter', 'hiring', 'employer', 'talent', 'manager'].some((t) => tokenSet.has(t))) {
-    return 'recruiter or hiring manager';
+    return 'recruiter';
   }
   if (['founder', 'client', 'business', 'product', 'startup'].some((t) => tokenSet.has(t))) {
-    return 'founder or client';
+    return 'founder';
   }
   if (['student', 'class', 'school', 'course'].some((t) => tokenSet.has(t))) {
-    return 'student';
+    return 'assistant';
   }
-  return 'visitor';
+  return undefined;
 }
 
 function scoreProject(tokens: string[], project: Project): number {

@@ -71,8 +71,8 @@ export default function Hero() {
           </div>
           <div className="flex-1 flex justify-center">
             <div className="relative w-72 h-72 md:w-[450px] md:h-[450px]">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/40 to-indigo-500/30 rounded-full blur-3xl animate-pulse" />
-              <div className="absolute inset-6 bg-gradient-to-br from-indigo-400/40 to-blue-500/30 rounded-full blur-2xl animate-pulse delay-100" />
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/40 to-indigo-500/30 rounded-full blur-3xl" />
+              <div className="absolute inset-6 bg-gradient-to-br from-indigo-400/40 to-blue-500/30 rounded-full blur-2xl" />
               <div className="absolute inset-10 bg-white/70 dark:bg-slate-900/70 rounded-full" />
               <img
                 src="/elroyheadshot.jpg"
