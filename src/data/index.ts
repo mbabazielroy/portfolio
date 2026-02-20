@@ -33,6 +33,19 @@ export const education: Education[] = [
 
 export const experience: Experience[] = [
   {
+    title: "Founder & CEO",
+    company: "Mbabazi Technologies Inc.",
+    location: "Ontario, Canada",
+    period: "2024 - Present",
+    bullets: [
+      "Founded Mbabazi Technologies Inc., an Ontario-incorporated company building software focused on trust, safety, and usability in everyday digital systems.",
+      "Created Sendly end-to-end — a mobile money platform for East Africa that replaces phone numbers with usernames and adds recipient confirmation to reduce transaction errors.",
+      "Running user testing and applying to startup incubators and validation programs while iterating on the MVP."
+    ],
+    tags: ["Engineering", "Product"],
+    technologies: ["React Native", "TypeScript", "Firebase", "Product Design", "Startup"]
+  },
+  {
     title: "Freelance Full-Stack Developer",
     company: "Self-employed",
     location: "Remote",
@@ -100,6 +113,14 @@ export const experience: Experience[] = [
 ];
 
 export const projects: Project[] = [
+  {
+    title: "Sendly",
+    description: "Mobile money platform for East Africa that reduces transaction errors by replacing phone numbers with usernames and adding recipient confirmation before funds are sent.",
+    technologies: ["React Native", "TypeScript", "Firebase", "Expo"],
+    githubUrl: "",
+    liveUrl: "",
+    image: "https://images.unsplash.com/photo-1607863680198-23d4b2565df0?auto=format&fit=crop&q=80&w=1600"
+  },
   {
     title: "Bgcdllc - General Contractor",
     description: "Construction services site for a general contractor with services list and contact form.",

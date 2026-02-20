@@ -26,20 +26,20 @@ export default function Hero() {
                 Hi, I'm Elroy Mbabazi
               </h1>
               <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400">
-                I build end-to-end products with modern web, mobile, and AI tooling.
+                Founder & product builder focused on trust, safety, and usability in everyday systems.
               </p>
               <div className="grid sm:grid-cols-2 gap-3 text-gray-700 dark:text-gray-300">
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="w-5 h-5 text-blue-600" />
-                  <span>Full-stack (Next.js, Firebase, Prisma) delivery.</span>
+                  <span>Founder of Mbabazi Technologies Inc. (Ontario, Canada).</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="w-5 h-5 text-blue-600" />
-                  <span>AI-assisted flows: OpenAI integrations and assistants.</span>
+                  <span>Creator of Sendly — mobile money for East Africa.</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="w-5 h-5 text-blue-600" />
-                  <span>Mobile experience with Expo/React Native.</span>
+                  <span>Full-stack builder: web, mobile, and AI tooling.</span>
                 </div>
               </div>
             </div>
