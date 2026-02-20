@@ -44,8 +44,10 @@ function MainContent() {
   }, []);
 
   const featuredProjects = useMemo(() => {
-    const withLive = projects.filter((p) => p.liveUrl);
-    return withLive.length ? withLive.slice(0, 3) : projects.slice(0, 3);
+    const sendly = projects.find((p) => p.title === 'Sendly');
+    const withLive = projects.filter((p) => p.liveUrl && p.title !== 'Sendly');
+    const combined = sendly ? [sendly, ...withLive] : withLive;
+    return combined.slice(0, 3);
   }, []);
 
   const filteredExperience = useMemo(() => {
@@ -81,7 +83,7 @@ function MainContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="About Me"
-            subtitle="A passionate developer with a unique perspective"
+            subtitle="Building software that earns trust"
           />
           <div className="grid lg:grid-cols-2 gap-12">
             <div className="space-y-6">
@@ -222,12 +224,74 @@ function MainContent() {
         </div>
       </section>
 
+      {/* What I'm Building Section */}
+      <section id="building" className="py-20 bg-gray-100 dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            title="What I'm Building"
+            subtitle="Current focus"
+          />
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            <div className="space-y-6">
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                Mobile money in East Africa is widely used but prone to a specific, costly error:
+                funds sent to a wrong number complete instantly with no built-in way to reverse them.
+                A single mistyped digit is enough.
+              </p>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                <strong className="text-gray-800 dark:text-gray-200">Sendly</strong> replaces phone
+                numbers with usernames and adds a recipient confirmation step before any funds move.
+                The goal is to make every transaction feel deliberate — and to build the kind of trust
+                that keeps people coming back to a platform.
+              </p>
+              <a
+                href="mailto:mbabazielroy@yahoo.com?subject=Sendly%20Inquiry"
+                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-colors"
+              >
+                Contact me about Sendly
+              </a>
+            </div>
+
+            <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm space-y-5">
+              <h4 className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+                Progress & Signals
+              </h4>
+              <ul className="space-y-5">
+                <li className="flex items-start gap-3">
+                  <span className="mt-1.5 w-2 h-2 rounded-full bg-green-500 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">Mbabazi Technologies Inc. incorporated</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Ontario, Canada — active corporation</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-1.5 w-2 h-2 rounded-full bg-green-500 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">Sendly MVP built end-to-end</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">User testing in progress</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-1.5 w-2 h-2 rounded-full bg-yellow-400 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">Incubator applications in progress</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                      LevelUP Validate · DMZ Pre-Incubator · Techstars Founder Catalyst
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Projects Section */}
       <section id="projects" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="Projects"
-            subtitle="Some of my recent work"
+            subtitle="Active work, client builds, and past explorations"
           />
           <div className="flex items-center gap-3 mb-6">
             <label className="text-sm text-gray-600 dark:text-gray-400" htmlFor="sort-projects">
@@ -247,8 +311,8 @@ function MainContent() {
           {sortOption === 'live' && (
             <div className="mb-10">
               <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Featured</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Live and polished builds you can click through.</p>
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Active</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Current focus and live client work.</p>
               </div>
               <div className="grid md:grid-cols-3 gap-6">
                 {featuredProjects.map((project, index) => (
@@ -264,13 +328,21 @@ function MainContent() {
               No projects match that technology yet. Try a different filter.
             </p>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {orderedProjects.map((project) => (
-                <Suspense key={project.title} fallback={<div>Loading...</div>}>
-                  <ProjectCardLazy project={project} />
-                </Suspense>
-              ))}
-            </div>
+            <>
+              {sortOption === 'live' && (
+                <div className="flex items-center gap-3 mb-5">
+                  <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Past work & explorations</span>
+                  <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
+                </div>
+              )}
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {orderedProjects.map((project) => (
+                  <Suspense key={project.title} fallback={<div>Loading...</div>}>
+                    <ProjectCardLazy project={project} />
+                  </Suspense>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </section>
