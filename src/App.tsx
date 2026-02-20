@@ -86,16 +86,21 @@ function MainContent() {
           <div className="grid lg:grid-cols-2 gap-12">
             <div className="space-y-6">
               <p className="text-lg text-gray-600 dark:text-gray-400">
-                I am a Computer Science graduate from the University of Washington
-                with a minor in Mathematics, actively seeking full-time roles. I build
-                reliable end-to-end products across Python, Java, C/C++, and modern
-                web stacks, with experience shipping to production and supporting users.
+                I'm a founder and product builder based in Canada, building software
+                focused on trust, safety, and usability in everyday systems. I'm the
+                founder of <strong className="text-gray-800 dark:text-gray-200">Mbabazi Technologies Inc.</strong>, an Ontario-incorporated company,
+                and the creator of <strong className="text-gray-800 dark:text-gray-200">Sendly</strong> — a mobile money platform designed for East
+                Africa that reduces transaction errors by replacing phone numbers with
+                usernames and recipient confirmation.
               </p>
               <p className="text-lg text-gray-600 dark:text-gray-400">
-                Having studied and worked across different continents, I bring a
-                collaborative mindset, clear communication, and strong problem-solving
-                skills. I thrive in teams that care about impact, quality, and fast
-                iteration.
+                I have lived experience using mobile money systems in East Africa and
+                am deeply familiar with their limitations, which informs a builder-first,
+                problem-driven approach to product design. I've built Sendly's MVP
+                end-to-end and am currently running user testing while applying to
+                startup incubators and validation programs. My long-term focus is on
+                building reliable digital infrastructure that improves trust and
+                confidence in essential services.
               </p>
               <div className="flex gap-6">
                 <a
