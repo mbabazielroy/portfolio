@@ -53,11 +53,11 @@ export default function Hero() {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
               <a
-                href="#projects"
-                onClick={(e) => handleScroll(e, 'projects')}
+                href="#building"
+                onClick={(e) => handleScroll(e, 'building')}
                 className="group px-8 py-4 rounded-2xl font-semibold inline-flex items-center gap-2 bg-white/80 dark:bg-slate-900/70 hover:scale-105 transition-all duration-200 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100"
               >
-                View Projects
+                What I'm Building
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
               <a
