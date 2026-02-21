@@ -78,7 +78,7 @@ export default function BusinessCard() {
       : '';
 
   // QR code: white bg, Sendly green dots — points to portfolio root
-  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&color=3EC44A&bgcolor=18181b&data=${encodeURIComponent(portfolioUrl)}`;
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&color=3EC44A&bgcolor=18181b&data=${encodeURIComponent(portfolioUrl)}`;
 
   return (
     <div className="min-h-screen bg-zinc-950 flex items-center justify-center p-4">
@@ -142,21 +142,21 @@ export default function BusinessCard() {
           </div>
 
           {/* Footer: QR + actions */}
-          <div className="px-8 py-6 flex items-end justify-between gap-4">
-            {/* QR code — points to portfolio */}
-            <div className="flex flex-col items-center gap-1.5">
+          <div className="px-8 py-6 space-y-5">
+            {/* QR code — centered, larger */}
+            <div className="flex flex-col items-center gap-2">
               <img
                 src={qrUrl}
                 alt="Scan to open portfolio"
-                width={64}
-                height={64}
-                className="rounded-lg"
+                width={120}
+                height={120}
+                className="rounded-xl"
               />
-              <p className="text-xs text-zinc-600">Portfolio</p>
+              <p className="text-xs text-zinc-500">Scan to open portfolio</p>
             </div>
 
             {/* Actions */}
-            <div className="flex flex-col gap-2 flex-1">
+            <div className="flex flex-col gap-2">
               {/*
                 "Save Contact" downloads a .vcf vCard file.
                 On iOS Safari this triggers "Add to Contacts" natively.
