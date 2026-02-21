@@ -10,12 +10,11 @@ import {
 } from 'lucide-react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { Suspense, lazy, useMemo, useState } from 'react';
-import EducationCard from './components/EducationCard';
 import ExperienceCard from './components/ExperienceCard';
 import Navbar from './components/Navbar';
 import SectionHeading from './components/SectionHeading';
 import SkillCard from './components/SkillCard';
-import { education, experience, projects } from './data';
+import { experience, projects } from './data';
 import ChatBot from './components/ChatBot';
 import BackToTopButton from './components/BackToTopButton';
 
@@ -31,8 +30,15 @@ const AdminMessagesLazy = lazy(() => import('./components/AdminMessages'));
 const HeroLazy = lazy(() => import('./components/Hero'));
 const ProjectCardLazy = lazy(() => import('./components/ProjectCard'));
 
+const CURATED_PROJECT_TITLES = [
+  'Sendly',
+  'Bgcdllc - General Contractor',
+  'Shine&Demure - cleaning products and services',
+  'AI Travel Planner',
+  'Portfolio Site',
+];
+
 function MainContent() {
-  const [sortOption, setSortOption] = useState<string>('live');
   const [activeExperienceTag, setActiveExperienceTag] = useState<string>('All');
 
   const experienceTags = useMemo(() => {
@@ -43,33 +49,15 @@ function MainContent() {
     return ['All', ...Array.from(tagSet).sort()];
   }, []);
 
-  const featuredProjects = useMemo(() => {
-    const sendly = projects.find((p) => p.title === 'Sendly');
-    const withLive = projects.filter((p) => p.liveUrl && p.title !== 'Sendly');
-    const combined = sendly ? [sendly, ...withLive] : withLive;
-    return combined.slice(0, 3);
-  }, []);
-
   const filteredExperience = useMemo(() => {
     if (activeExperienceTag === 'All') return experience;
     return experience.filter((exp) => exp.tags?.includes(activeExperienceTag));
   }, [activeExperienceTag]);
 
-  const orderedProjects = useMemo(() => {
-    const base = projects.filter((p) => !featuredProjects.find((f) => f.title === p.title));
-    const sorted = [...base].sort((a, b) => {
-      if (sortOption === 'live') {
-        const aLive = a.liveUrl ? 1 : 0;
-        const bLive = b.liveUrl ? 1 : 0;
-        if (aLive !== bLive) return bLive - aLive;
-        return a.title.localeCompare(b.title);
-      }
-      if (sortOption === 'az') return a.title.localeCompare(b.title);
-      if (sortOption === 'za') return b.title.localeCompare(a.title);
-      return 0;
-    });
-    return sorted;
-  }, [featuredProjects, sortOption]);
+  const curatedProjects = useMemo(
+    () => CURATED_PROJECT_TITLES.map((t) => projects.find((p) => p.title === t)).filter(Boolean),
+    []
+  );
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
@@ -78,7 +66,7 @@ function MainContent() {
         <HeroLazy />
       </Suspense>
 
-      {/* About Section */}
+      {/* About Section — merged with education summary + how I work */}
       <section id="about" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
@@ -86,6 +74,7 @@ function MainContent() {
             subtitle="Building software that earns trust"
           />
           <div className="grid lg:grid-cols-2 gap-12">
+            {/* Left: bio + education summary + socials */}
             <div className="space-y-6">
               <p className="text-lg text-gray-600 dark:text-gray-400">
                 I'm a founder and product builder based in Canada, building software
@@ -100,91 +89,119 @@ function MainContent() {
                 am deeply familiar with their limitations, which informs a builder-first,
                 problem-driven approach to product design. I've built Sendly's MVP
                 end-to-end and am currently running user testing while applying to
-                startup incubators and validation programs. My long-term focus is on
-                building reliable digital infrastructure that improves trust and
-                confidence in essential services.
+                startup incubators and validation programs.
               </p>
-              <div className="flex gap-6">
-                <a
-                  href="https://github.com/mbabazielroy"
-                  className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl hover:scale-110 transition-transform"
-                >
+              {/* Education — compact */}
+              <div className="border-l-2 border-gray-200 dark:border-gray-700 pl-4 space-y-1">
+                <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-2">Education</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300">
+                  <span className="font-medium">BS Computer Science & Systems</span> — University of Washington Tacoma (2022–Present)
+                </p>
+                <p className="text-sm text-gray-700 dark:text-gray-300">
+                  <span className="font-medium">AS Computer Engineering</span> — Tacoma Community College (2019–2022)
+                </p>
+              </div>
+              <div className="flex gap-4">
+                <a href="https://github.com/mbabazielroy" className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl hover:scale-110 transition-transform">
                   <Github className="w-6 h-6" />
                 </a>
-                <a
-                  href="https://www.linkedin.com/in/elroy-mbabazi/"
-                  className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl hover:scale-110 transition-transform"
-                >
+                <a href="https://www.linkedin.com/in/elroy-mbabazi/" className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl hover:scale-110 transition-transform">
                   <Linkedin className="w-6 h-6" />
                 </a>
-                <a
-                  href="mailto:mbabazielroy@yahoo.com"
-                  className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl hover:scale-110 transition-transform"
-                >
+                <a href="mailto:mbabazielroy@yahoo.com" className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl hover:scale-110 transition-transform">
                   <Mail className="w-6 h-6" />
                 </a>
-                <a
-                  href="tel:+14372210664"
-                  className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl hover:scale-110 transition-transform"
-                >
+                <a href="tel:+14372210664" className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl hover:scale-110 transition-transform">
                   <Phone className="w-6 h-6" />
                 </a>
               </div>
             </div>
-            <div className="grid sm:grid-cols-2 gap-4">
-              {skills.map((skill) => (
-                <SkillCard key={skill.name} {...skill} />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Education Section */}
-      <section id="education" className="py-20 bg-gray-100 dark:bg-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            title="Education"
-            subtitle="My academic journey across continents"
-          />
-          <div className="grid md:grid-cols-2 gap-8">
-            {education.map((edu, index) => (
-              <EducationCard key={index} education={edu} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How I Work & Testimonials */}
-      <section id="how-i-work" className="py-20 bg-gray-100 dark:bg-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            title="How I Work"
-            subtitle="Process, communication, and what to expect"
-          />
-          <div className="grid lg:grid-cols-2 gap-8">
-            <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm space-y-4">
-              <h4 className="text-lg font-bold text-gray-900 dark:text-white">Process</h4>
-              <ul className="space-y-3 text-sm text-gray-700 dark:text-gray-300 list-disc pl-5">
-                <li>Discovery → define scope, goals, timeline, and success criteria.</li>
-                <li>Plan → architecture, milestones, and risk/assumption log.</li>
-                <li>Build → iterative delivery with demos and async updates.</li>
-                <li>Launch → handoff, docs, and light training if needed.</li>
-              </ul>
-            </div>
-            <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm space-y-4">
-              <h4 className="text-lg font-bold text-gray-900 dark:text-white">Testimonials & Trust</h4>
-              <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
-                <p className="border-l-4 border-blue-500 pl-3">
-                  “Clear communication, fast iterations, and reliable delivery on our web app.” — Small business client
+            {/* Right: skills + process + testimonials */}
+            <div className="space-y-6">
+              <div className="grid sm:grid-cols-2 gap-4">
+                {skills.map((skill) => (
+                  <SkillCard key={skill.name} {...skill} />
+                ))}
+              </div>
+              <div className="bg-white dark:bg-gray-800 p-5 rounded-2xl shadow-sm space-y-3">
+                <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">How I Work</p>
+                <ol className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                  <li><span className="font-semibold">1. Discovery</span> — define scope, goals, and success criteria.</li>
+                  <li><span className="font-semibold">2. Plan</span> — architecture, milestones, and risk log.</li>
+                  <li><span className="font-semibold">3. Build</span> — iterative delivery with demos and async updates.</li>
+                  <li><span className="font-semibold">4. Launch</span> — handoff, docs, and light training if needed.</li>
+                </ol>
+              </div>
+              <div className="space-y-3">
+                <p className="text-sm italic text-gray-600 dark:text-gray-400 border-l-4 border-blue-500 pl-3">
+                  "Clear communication, fast iterations, and reliable delivery on our web app." — Small business client
                 </p>
-                <p className="border-l-4 border-blue-500 pl-3">
-                  “Collaborative and thoughtful, especially around stakeholder needs and reporting.” — Campus leadership
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  References available on request. Happy to share more context in a call.
+                <p className="text-sm italic text-gray-600 dark:text-gray-400 border-l-4 border-blue-500 pl-3">
+                  "Collaborative and thoughtful, especially around stakeholder needs and reporting." — Campus leadership
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* What I'm Building — immediately after About */}
+      <section id="building" className="py-20 bg-gray-100 dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            title="What I'm Building"
+            subtitle="Current focus — Sendly"
+          />
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            <div className="space-y-6">
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                Mobile money in East Africa is widely used but prone to a specific, costly error:
+                funds sent to a wrong number complete instantly with no built-in way to reverse them.
+                A single mistyped digit is enough.
+              </p>
+              <p className="text-lg text-gray-600 dark:text-gray-400">
+                <strong className="text-gray-800 dark:text-gray-200">Sendly</strong> replaces phone
+                numbers with usernames and adds a recipient confirmation step before any funds move.
+                The goal is to make every transaction feel deliberate — and to build the kind of trust
+                that keeps people coming back to a platform.
+              </p>
+              <a
+                href="mailto:mbabazielroy@yahoo.com?subject=Sendly%20Inquiry"
+                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-colors"
+              >
+                Contact me about Sendly
+              </a>
+            </div>
+            <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm space-y-5">
+              <h4 className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+                Progress & Signals
+              </h4>
+              <ul className="space-y-5">
+                <li className="flex items-start gap-3">
+                  <span className="mt-1.5 w-2 h-2 rounded-full bg-green-500 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">Mbabazi Technologies Inc. incorporated</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Ontario, Canada — active corporation</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-1.5 w-2 h-2 rounded-full bg-green-500 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">Sendly MVP built end-to-end</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">User testing in progress</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-1.5 w-2 h-2 rounded-full bg-yellow-400 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">Incubator applications in progress</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                      LevelUP Validate · DMZ Pre-Incubator · Techstars Founder Catalyst
+                    </p>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -224,131 +241,34 @@ function MainContent() {
         </div>
       </section>
 
-      {/* What I'm Building Section */}
-      <section id="building" className="py-20 bg-gray-100 dark:bg-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            title="What I'm Building"
-            subtitle="Current focus"
-          />
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            <div className="space-y-6">
-              <p className="text-lg text-gray-600 dark:text-gray-400">
-                Mobile money in East Africa is widely used but prone to a specific, costly error:
-                funds sent to a wrong number complete instantly with no built-in way to reverse them.
-                A single mistyped digit is enough.
-              </p>
-              <p className="text-lg text-gray-600 dark:text-gray-400">
-                <strong className="text-gray-800 dark:text-gray-200">Sendly</strong> replaces phone
-                numbers with usernames and adds a recipient confirmation step before any funds move.
-                The goal is to make every transaction feel deliberate — and to build the kind of trust
-                that keeps people coming back to a platform.
-              </p>
-              <a
-                href="mailto:mbabazielroy@yahoo.com?subject=Sendly%20Inquiry"
-                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-colors"
-              >
-                Contact me about Sendly
-              </a>
-            </div>
-
-            <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm space-y-5">
-              <h4 className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
-                Progress & Signals
-              </h4>
-              <ul className="space-y-5">
-                <li className="flex items-start gap-3">
-                  <span className="mt-1.5 w-2 h-2 rounded-full bg-green-500 flex-shrink-0" />
-                  <div>
-                    <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">Mbabazi Technologies Inc. incorporated</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Ontario, Canada — active corporation</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="mt-1.5 w-2 h-2 rounded-full bg-green-500 flex-shrink-0" />
-                  <div>
-                    <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">Sendly MVP built end-to-end</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">User testing in progress</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="mt-1.5 w-2 h-2 rounded-full bg-yellow-400 flex-shrink-0" />
-                  <div>
-                    <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">Incubator applications in progress</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                      LevelUP Validate · DMZ Pre-Incubator · Techstars Founder Catalyst
-                    </p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" className="py-20">
+      {/* Projects Section — curated top 5 */}
+      <section id="projects" className="py-20 bg-gray-100 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="Projects"
-            subtitle="Active work, client builds, and past explorations"
+            subtitle="Client builds, active products, and selected work"
           />
-          <div className="flex items-center gap-3 mb-6">
-            <label className="text-sm text-gray-600 dark:text-gray-400" htmlFor="sort-projects">
-              Sort by
-            </label>
-            <select
-              id="sort-projects"
-              value={sortOption}
-              onChange={(e) => setSortOption(e.target.value)}
-              className="px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="live">Live demos first</option>
-              <option value="az">Alphabetical A–Z</option>
-              <option value="za">Alphabetical Z–A</option>
-            </select>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {curatedProjects.map((project) => (
+              <Suspense key={project!.title} fallback={<div>Loading...</div>}>
+                <ProjectCardLazy project={project!} />
+              </Suspense>
+            ))}
           </div>
-          {sortOption === 'live' && (
-            <div className="mb-10">
-              <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Active</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Current focus and live client work.</p>
-              </div>
-              <div className="grid md:grid-cols-3 gap-6">
-                {featuredProjects.map((project, index) => (
-                  <Suspense key={`featured-${index}`} fallback={<div>Loading...</div>}>
-                    <ProjectCardLazy project={project} />
-                  </Suspense>
-                ))}
-              </div>
-            </div>
-          )}
-          {orderedProjects.length === 0 ? (
-            <p className="text-gray-600 dark:text-gray-400">
-              No projects match that technology yet. Try a different filter.
-            </p>
-          ) : (
-            <>
-              {sortOption === 'live' && (
-                <div className="flex items-center gap-3 mb-5">
-                  <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Past work & explorations</span>
-                  <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
-                </div>
-              )}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {orderedProjects.map((project) => (
-                  <Suspense key={project.title} fallback={<div>Loading...</div>}>
-                    <ProjectCardLazy project={project} />
-                  </Suspense>
-                ))}
-              </div>
-            </>
-          )}
+          <div className="text-center">
+            <a
+              href="https://github.com/mbabazielroy"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
+              <Github className="w-4 h-4" />
+              View all projects on GitHub
+            </a>
+          </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-gray-100 dark:bg-gray-800">
+      <section id="contact" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="Contact Me"
@@ -358,11 +278,11 @@ function MainContent() {
             <Suspense fallback={<div>Loading...</div>}>
               <ContactFormLazy />
             </Suspense>
-            <div className="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-sm">
+            <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm">
               <h3 className="text-xl font-bold mb-6">Contact Information</h3>
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
+                  <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-xl">
                     <Mail className="w-5 h-5 text-blue-600" />
                   </div>
                   <a href="mailto:mbabazielroy@yahoo.com" className="hover:text-blue-600">
@@ -370,7 +290,7 @@ function MainContent() {
                   </a>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
+                  <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-xl">
                     <Phone className="w-5 h-5 text-blue-600" />
                   </div>
                   <a href="tel:+14372210664" className="hover:text-blue-600">
@@ -378,7 +298,7 @@ function MainContent() {
                   </a>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
+                  <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-xl">
                     <Github className="w-5 h-5 text-blue-600" />
                   </div>
                   <a href="https://github.com/mbabazielroy" className="hover:text-blue-600">
@@ -386,7 +306,7 @@ function MainContent() {
                   </a>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
+                  <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-xl">
                     <Linkedin className="w-5 h-5 text-blue-600" />
                   </div>
                   <a href="https://www.linkedin.com/in/elroy-mbabazi/" className="hover:text-blue-600">
