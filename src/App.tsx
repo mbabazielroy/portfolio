@@ -95,7 +95,7 @@ function MainContent() {
               <div className="border-l-2 border-gray-200 dark:border-slate-700 pl-4 space-y-1">
                 <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-slate-500 mb-2">Education</p>
                 <p className="text-sm text-gray-700 dark:text-slate-300">
-                  <span className="font-medium">BS Computer Science & Systems</span> — University of Washington Tacoma (2022–Present)
+                  <span className="font-medium">BS Computer Science & Systems</span> — University of Washington Tacoma (2022–2024)
                 </p>
                 <p className="text-sm text-gray-700 dark:text-slate-300">
                   <span className="font-medium">AS Computer Engineering</span> — Tacoma Community College (2019–2022)
