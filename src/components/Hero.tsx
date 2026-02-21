@@ -45,26 +45,19 @@ export default function Hero() {
             </div>
             <div className="flex flex-wrap gap-4">
               <a
-                href="#contact"
-                onClick={(e) => handleScroll(e, 'contact')}
-                className="group bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-2xl font-semibold inline-flex items-center gap-2 hover:scale-105 transition-all duration-200 shadow-lg shadow-indigo-500/20"
-              >
-                Contact Me
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a
                 href="#building"
                 onClick={(e) => handleScroll(e, 'building')}
-                className="group px-8 py-4 rounded-2xl font-semibold inline-flex items-center gap-2 bg-white/80 dark:bg-slate-900/70 hover:scale-105 transition-all duration-200 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100"
+                className="group bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-2xl font-semibold inline-flex items-center gap-2 hover:scale-105 transition-all duration-200 shadow-lg shadow-indigo-500/20"
               >
-                What I'm Building
+                See What I'm Building
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
               <a
-                href="mailto:mbabazielroy@yahoo.com?subject=Resume%20Request"
-                className="group px-8 py-4 rounded-2xl font-semibold inline-flex items-center gap-2 bg-white/70 dark:bg-slate-900/70 hover:scale-105 transition-all duration-200 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200"
+                href="#contact"
+                onClick={(e) => handleScroll(e, 'contact')}
+                className="group px-8 py-4 rounded-2xl font-semibold inline-flex items-center gap-2 bg-white/80 dark:bg-slate-900/70 hover:scale-105 transition-all duration-200 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100"
               >
-                Get Resume
+                Contact Me
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
