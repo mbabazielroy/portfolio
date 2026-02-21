@@ -60,7 +60,7 @@ function MainContent() {
   );
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
+    <div className="min-h-screen bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100">
       <Navbar />
       <Suspense fallback={<div>Loading...</div>}>
         <HeroLazy />
@@ -102,16 +102,16 @@ function MainContent() {
                 </p>
               </div>
               <div className="flex gap-4">
-                <a href="https://github.com/mbabazielroy" className="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl hover:scale-110 transition-transform">
+                <a href="https://github.com/mbabazielroy" className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-xl hover:scale-110 transition-transform">
                   <Github className="w-6 h-6" />
                 </a>
-                <a href="https://www.linkedin.com/in/elroy-mbabazi/" className="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl hover:scale-110 transition-transform">
+                <a href="https://www.linkedin.com/in/elroy-mbabazi/" className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-xl hover:scale-110 transition-transform">
                   <Linkedin className="w-6 h-6" />
                 </a>
-                <a href="mailto:mbabazielroy@yahoo.com" className="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl hover:scale-110 transition-transform">
+                <a href="mailto:mbabazielroy@yahoo.com" className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-xl hover:scale-110 transition-transform">
                   <Mail className="w-6 h-6" />
                 </a>
-                <a href="tel:+14372210664" className="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl hover:scale-110 transition-transform">
+                <a href="tel:+14372210664" className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-xl hover:scale-110 transition-transform">
                   <Phone className="w-6 h-6" />
                 </a>
               </div>
@@ -124,7 +124,7 @@ function MainContent() {
                   <SkillCard key={skill.name} {...skill} />
                 ))}
               </div>
-              <div className="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-sm space-y-3">
+              <div className="bg-zinc-50 dark:bg-zinc-900 p-5 rounded-2xl border border-zinc-100 dark:border-zinc-800 space-y-3">
                 <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-slate-500">How I Work</p>
                 <ol className="space-y-2 text-sm text-gray-700 dark:text-slate-300">
                   <li><span className="font-semibold">1. Discovery</span> — define scope, goals, and success criteria.</li>
@@ -134,10 +134,10 @@ function MainContent() {
                 </ol>
               </div>
               <div className="space-y-3">
-                <p className="text-sm italic text-gray-600 dark:text-slate-400 border-l-4 border-amber-400 pl-3">
+                <p className="text-sm italic text-gray-600 dark:text-slate-400 border-l-4 border-zinc-200 dark:border-zinc-700 pl-3">
                   "Clear communication, fast iterations, and reliable delivery on our web app." — Small business client
                 </p>
-                <p className="text-sm italic text-gray-600 dark:text-slate-400 border-l-4 border-amber-400 pl-3">
+                <p className="text-sm italic text-gray-600 dark:text-slate-400 border-l-4 border-zinc-200 dark:border-zinc-700 pl-3">
                   "Collaborative and thoughtful, especially around stakeholder needs and reporting." — Campus leadership
                 </p>
               </div>
@@ -147,7 +147,7 @@ function MainContent() {
       </section>
 
       {/* Sendly — immediately after About */}
-      <section id="building" className="py-20 bg-slate-50 dark:bg-slate-800">
+      <section id="building" className="py-20 bg-zinc-50 dark:bg-zinc-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-3">
             <span className="text-xs font-bold tracking-widest uppercase text-sendly dark:text-sendly-light bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800/60 px-3 py-1 rounded-full">
@@ -180,13 +180,13 @@ function MainContent() {
                 </a>
                 <a
                   href="/#/card"
-                  className="inline-flex items-center gap-2 border border-amber-500 text-amber-600 dark:text-amber-400 dark:border-amber-600 px-6 py-3 rounded-xl font-semibold transition-colors hover:bg-amber-50 dark:hover:bg-amber-900/10"
+                  className="inline-flex items-center gap-2 border border-zinc-300 dark:border-zinc-600 text-zinc-700 dark:text-zinc-300 px-6 py-3 rounded-xl font-semibold transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800"
                 >
                   My business card
                 </a>
               </div>
             </div>
-            <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm space-y-5">
+            <div className="bg-white dark:bg-zinc-900 p-6 rounded-2xl border border-zinc-100 dark:border-zinc-800 space-y-5">
               <h4 className="text-xs font-semibold text-gray-400 dark:text-slate-500 uppercase tracking-widest">
                 Progress & Signals
               </h4>
@@ -221,7 +221,7 @@ function MainContent() {
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="py-20 bg-white dark:bg-slate-900">
+      <section id="experience" className="py-20 bg-white dark:bg-zinc-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="Experience"
@@ -237,8 +237,8 @@ function MainContent() {
                   aria-pressed={isActive}
                   className={`px-3 py-1.5 rounded-full border text-xs font-semibold transition-colors ${
                     isActive
-                      ? 'bg-amber-600 text-white border-amber-600'
-                      : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:bg-amber-50 dark:hover:bg-slate-700'
+                      ? 'bg-zinc-900 text-white border-zinc-900 dark:bg-zinc-50 dark:text-zinc-900 dark:border-zinc-50'
+                      : 'bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800'
                   }`}
                 >
                   {tag}
@@ -255,7 +255,7 @@ function MainContent() {
       </section>
 
       {/* Projects Section — curated top 5 */}
-      <section id="projects" className="py-20 bg-slate-50 dark:bg-slate-800">
+      <section id="projects" className="py-20 bg-zinc-50 dark:bg-zinc-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="Projects"
@@ -271,7 +271,7 @@ function MainContent() {
           <div className="text-center">
             <a
               href="https://github.com/mbabazielroy"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
             >
               <Github className="w-4 h-4" />
               View all projects on GitHub
@@ -281,7 +281,7 @@ function MainContent() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-white dark:bg-slate-900">
+      <section id="contact" className="py-20 bg-white dark:bg-zinc-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="Contact Me"
@@ -291,38 +291,38 @@ function MainContent() {
             <Suspense fallback={<div>Loading...</div>}>
               <ContactFormLazy />
             </Suspense>
-            <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm">
+            <div className="bg-white dark:bg-zinc-900 p-8 rounded-2xl border border-zinc-100 dark:border-zinc-800">
               <h3 className="text-xl font-bold mb-6">Contact Information</h3>
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gray-100 dark:bg-slate-700 rounded-xl">
-                    <Mail className="w-5 h-5 text-amber-600" />
+                  <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
+                    <Mail className="w-5 h-5 text-zinc-600 dark:text-zinc-300" />
                   </div>
-                  <a href="mailto:mbabazielroy@yahoo.com" className="hover:text-amber-600">
+                  <a href="mailto:mbabazielroy@yahoo.com" className="hover:text-zinc-900 dark:hover:text-zinc-50">
                     mbabazielroy@yahoo.com
                   </a>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gray-100 dark:bg-slate-700 rounded-xl">
-                    <Phone className="w-5 h-5 text-amber-600" />
+                  <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
+                    <Phone className="w-5 h-5 text-zinc-600 dark:text-zinc-300" />
                   </div>
-                  <a href="tel:+14372210664" className="hover:text-amber-600">
+                  <a href="tel:+14372210664" className="hover:text-zinc-900 dark:hover:text-zinc-50">
                     +1 (437) 221-0664
                   </a>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gray-100 dark:bg-slate-700 rounded-xl">
-                    <Github className="w-5 h-5 text-amber-600" />
+                  <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
+                    <Github className="w-5 h-5 text-zinc-600 dark:text-zinc-300" />
                   </div>
-                  <a href="https://github.com/mbabazielroy" className="hover:text-amber-600">
+                  <a href="https://github.com/mbabazielroy" className="hover:text-zinc-900 dark:hover:text-zinc-50">
                     github.com/mbabazielroy
                   </a>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gray-100 dark:bg-slate-700 rounded-xl">
-                    <Linkedin className="w-5 h-5 text-amber-600" />
+                  <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-xl">
+                    <Linkedin className="w-5 h-5 text-zinc-600 dark:text-zinc-300" />
                   </div>
-                  <a href="https://www.linkedin.com/in/elroy-mbabazi/" className="hover:text-amber-600">
+                  <a href="https://www.linkedin.com/in/elroy-mbabazi/" className="hover:text-zinc-900 dark:hover:text-zinc-50">
                     linkedin.com/in/elroy-mbabazi/
                   </a>
                 </div>
