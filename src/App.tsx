@@ -15,7 +15,6 @@ import Navbar from './components/Navbar';
 import SectionHeading from './components/SectionHeading';
 import SkillCard from './components/SkillCard';
 import { experience, projects } from './data';
-import ChatBot from './components/ChatBot';
 import BackToTopButton from './components/BackToTopButton';
 const BusinessCardLazy = lazy(() => import('./components/BusinessCard'));
 
@@ -61,14 +60,14 @@ function MainContent() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <div className="min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
       <Navbar />
       <Suspense fallback={<div>Loading...</div>}>
         <HeroLazy />
       </Suspense>
 
       {/* About Section — merged with education summary + how I work */}
-      <section id="about" className="py-20">
+      <section id="about" className="py-20 bg-white dark:bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="About Me"
@@ -77,15 +76,15 @@ function MainContent() {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Left: bio + education summary + socials */}
             <div className="space-y-6">
-              <p className="text-lg text-gray-600 dark:text-gray-400">
+              <p className="text-lg text-gray-600 dark:text-slate-400">
                 I'm a founder and product builder based in Canada, building software
                 focused on trust, safety, and usability in everyday systems. I'm the
-                founder of <strong className="text-gray-800 dark:text-gray-200">Mbabazi Technologies Inc.</strong>, an Ontario-incorporated company,
-                and the creator of <strong className="text-gray-800 dark:text-gray-200">Sendly</strong> — a mobile money platform designed for East
+                founder of <strong className="text-gray-800 dark:text-slate-200">Mbabazi Technologies Inc.</strong>, an Ontario-incorporated company,
+                and the creator of <strong className="text-gray-800 dark:text-slate-200">Sendly</strong> — a mobile money platform designed for East
                 Africa that reduces transaction errors by replacing phone numbers with
                 usernames and recipient confirmation.
               </p>
-              <p className="text-lg text-gray-600 dark:text-gray-400">
+              <p className="text-lg text-gray-600 dark:text-slate-400">
                 I have lived experience using mobile money systems in East Africa and
                 am deeply familiar with their limitations, which informs a builder-first,
                 problem-driven approach to product design. I've built Sendly's MVP
@@ -93,26 +92,26 @@ function MainContent() {
                 startup incubators and validation programs.
               </p>
               {/* Education — compact */}
-              <div className="border-l-2 border-gray-200 dark:border-gray-700 pl-4 space-y-1">
-                <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-2">Education</p>
-                <p className="text-sm text-gray-700 dark:text-gray-300">
+              <div className="border-l-2 border-gray-200 dark:border-slate-700 pl-4 space-y-1">
+                <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-slate-500 mb-2">Education</p>
+                <p className="text-sm text-gray-700 dark:text-slate-300">
                   <span className="font-medium">BS Computer Science & Systems</span> — University of Washington Tacoma (2022–Present)
                 </p>
-                <p className="text-sm text-gray-700 dark:text-gray-300">
+                <p className="text-sm text-gray-700 dark:text-slate-300">
                   <span className="font-medium">AS Computer Engineering</span> — Tacoma Community College (2019–2022)
                 </p>
               </div>
               <div className="flex gap-4">
-                <a href="https://github.com/mbabazielroy" className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl hover:scale-110 transition-transform">
+                <a href="https://github.com/mbabazielroy" className="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl hover:scale-110 transition-transform">
                   <Github className="w-6 h-6" />
                 </a>
-                <a href="https://www.linkedin.com/in/elroy-mbabazi/" className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl hover:scale-110 transition-transform">
+                <a href="https://www.linkedin.com/in/elroy-mbabazi/" className="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl hover:scale-110 transition-transform">
                   <Linkedin className="w-6 h-6" />
                 </a>
-                <a href="mailto:mbabazielroy@yahoo.com" className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl hover:scale-110 transition-transform">
+                <a href="mailto:mbabazielroy@yahoo.com" className="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl hover:scale-110 transition-transform">
                   <Mail className="w-6 h-6" />
                 </a>
-                <a href="tel:+14372210664" className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl hover:scale-110 transition-transform">
+                <a href="tel:+14372210664" className="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl hover:scale-110 transition-transform">
                   <Phone className="w-6 h-6" />
                 </a>
               </div>
@@ -125,9 +124,9 @@ function MainContent() {
                   <SkillCard key={skill.name} {...skill} />
                 ))}
               </div>
-              <div className="bg-white dark:bg-gray-800 p-5 rounded-2xl shadow-sm space-y-3">
-                <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">How I Work</p>
-                <ol className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+              <div className="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-sm space-y-3">
+                <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-slate-500">How I Work</p>
+                <ol className="space-y-2 text-sm text-gray-700 dark:text-slate-300">
                   <li><span className="font-semibold">1. Discovery</span> — define scope, goals, and success criteria.</li>
                   <li><span className="font-semibold">2. Plan</span> — architecture, milestones, and risk log.</li>
                   <li><span className="font-semibold">3. Build</span> — iterative delivery with demos and async updates.</li>
@@ -135,10 +134,10 @@ function MainContent() {
                 </ol>
               </div>
               <div className="space-y-3">
-                <p className="text-sm italic text-gray-600 dark:text-gray-400 border-l-4 border-amber-400 pl-3">
+                <p className="text-sm italic text-gray-600 dark:text-slate-400 border-l-4 border-amber-400 pl-3">
                   "Clear communication, fast iterations, and reliable delivery on our web app." — Small business client
                 </p>
-                <p className="text-sm italic text-gray-600 dark:text-gray-400 border-l-4 border-amber-400 pl-3">
+                <p className="text-sm italic text-gray-600 dark:text-slate-400 border-l-4 border-amber-400 pl-3">
                   "Collaborative and thoughtful, especially around stakeholder needs and reporting." — Campus leadership
                 </p>
               </div>
@@ -148,10 +147,10 @@ function MainContent() {
       </section>
 
       {/* Sendly — immediately after About */}
-      <section id="building" className="py-20 bg-stone-50 dark:bg-gray-800">
+      <section id="building" className="py-20 bg-slate-50 dark:bg-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-3">
-            <span className="text-xs font-bold tracking-widest uppercase text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 px-3 py-1 rounded-full">
+            <span className="text-xs font-bold tracking-widest uppercase text-sendly dark:text-sendly-light bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800/60 px-3 py-1 rounded-full">
               Active Product
             </span>
           </div>
@@ -161,13 +160,13 @@ function MainContent() {
           />
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             <div className="space-y-6">
-              <p className="text-lg text-gray-600 dark:text-gray-400">
+              <p className="text-lg text-gray-600 dark:text-slate-400">
                 Mobile money is how hundreds of millions of East Africans pay rent, send money home,
                 and run small businesses. But one wrong digit sends funds to a stranger — instantly,
                 and with no way back. This isn't a rare edge case. It's a daily reality.
               </p>
-              <p className="text-lg text-gray-600 dark:text-gray-400">
-                <strong className="text-gray-800 dark:text-gray-200">Sendly</strong> replaces phone
+              <p className="text-lg text-gray-600 dark:text-slate-400">
+                <strong className="text-gray-800 dark:text-slate-200">Sendly</strong> replaces phone
                 numbers with usernames and shows the recipient's name for confirmation before any
                 funds move. Simple fix, serious trust. The kind of product that people recommend
                 to their whole family.
@@ -175,42 +174,42 @@ function MainContent() {
               <div className="flex flex-wrap gap-3">
                 <a
                   href="mailto:mbabazielroy@yahoo.com?subject=Sendly%20Inquiry"
-                  className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-3 rounded-xl font-semibold transition-colors shadow-md shadow-emerald-700/20"
+                  className="inline-flex items-center gap-2 bg-sendly hover:bg-sendly-dark text-white px-6 py-3 rounded-xl font-semibold transition-colors shadow-md shadow-green-600/20"
                 >
                   Talk to me about Sendly
                 </a>
                 <a
                   href="/#/card"
-                  className="inline-flex items-center gap-2 border border-emerald-700 text-emerald-700 dark:text-emerald-400 dark:border-emerald-600 px-6 py-3 rounded-xl font-semibold transition-colors hover:bg-emerald-50 dark:hover:bg-emerald-900/20"
+                  className="inline-flex items-center gap-2 border border-amber-500 text-amber-600 dark:text-amber-400 dark:border-amber-600 px-6 py-3 rounded-xl font-semibold transition-colors hover:bg-amber-50 dark:hover:bg-amber-900/10"
                 >
                   My business card
                 </a>
               </div>
             </div>
-            <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm space-y-5">
-              <h4 className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+            <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm space-y-5">
+              <h4 className="text-xs font-semibold text-gray-400 dark:text-slate-500 uppercase tracking-widest">
                 Progress & Signals
               </h4>
               <ul className="space-y-5">
                 <li className="flex items-start gap-3">
                   <span className="mt-1.5 w-2 h-2 rounded-full bg-green-500 flex-shrink-0" />
                   <div>
-                    <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">Mbabazi Technologies Inc. incorporated</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Ontario, Canada — active corporation</p>
+                    <p className="text-sm font-semibold text-gray-800 dark:text-slate-200">Mbabazi Technologies Inc. incorporated</p>
+                    <p className="text-xs text-gray-500 dark:text-slate-400 mt-0.5">Ontario, Canada — active corporation</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="mt-1.5 w-2 h-2 rounded-full bg-green-500 flex-shrink-0" />
                   <div>
-                    <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">Sendly MVP built end-to-end</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">User testing in progress</p>
+                    <p className="text-sm font-semibold text-gray-800 dark:text-slate-200">Sendly MVP built end-to-end</p>
+                    <p className="text-xs text-gray-500 dark:text-slate-400 mt-0.5">User testing in progress</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="mt-1.5 w-2 h-2 rounded-full bg-yellow-400 flex-shrink-0" />
                   <div>
-                    <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">Incubator applications in progress</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                    <p className="text-sm font-semibold text-gray-800 dark:text-slate-200">Incubator applications in progress</p>
+                    <p className="text-xs text-gray-500 dark:text-slate-400 mt-0.5">
                       LevelUP Validate · DMZ Pre-Incubator · Techstars Founder Catalyst
                     </p>
                   </div>
@@ -222,7 +221,7 @@ function MainContent() {
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="py-20">
+      <section id="experience" className="py-20 bg-white dark:bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="Experience"
@@ -238,8 +237,8 @@ function MainContent() {
                   aria-pressed={isActive}
                   className={`px-3 py-1.5 rounded-full border text-xs font-semibold transition-colors ${
                     isActive
-                      ? 'bg-emerald-700 text-white border-emerald-700'
-                      : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border-gray-300 dark:border-gray-700 hover:bg-emerald-50 dark:hover:bg-gray-700'
+                      ? 'bg-amber-600 text-white border-amber-600'
+                      : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:bg-amber-50 dark:hover:bg-slate-700'
                   }`}
                 >
                   {tag}
@@ -256,7 +255,7 @@ function MainContent() {
       </section>
 
       {/* Projects Section — curated top 5 */}
-      <section id="projects" className="py-20 bg-gray-100 dark:bg-gray-800">
+      <section id="projects" className="py-20 bg-slate-50 dark:bg-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="Projects"
@@ -272,7 +271,7 @@ function MainContent() {
           <div className="text-center">
             <a
               href="https://github.com/mbabazielroy"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
             >
               <Github className="w-4 h-4" />
               View all projects on GitHub
@@ -282,7 +281,7 @@ function MainContent() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20">
+      <section id="contact" className="py-20 bg-white dark:bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="Contact Me"
@@ -292,38 +291,38 @@ function MainContent() {
             <Suspense fallback={<div>Loading...</div>}>
               <ContactFormLazy />
             </Suspense>
-            <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm">
+            <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm">
               <h3 className="text-xl font-bold mb-6">Contact Information</h3>
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-xl">
-                    <Mail className="w-5 h-5 text-emerald-700" />
+                  <div className="p-3 bg-gray-100 dark:bg-slate-700 rounded-xl">
+                    <Mail className="w-5 h-5 text-amber-600" />
                   </div>
-                  <a href="mailto:mbabazielroy@yahoo.com" className="hover:text-emerald-700">
+                  <a href="mailto:mbabazielroy@yahoo.com" className="hover:text-amber-600">
                     mbabazielroy@yahoo.com
                   </a>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-xl">
-                    <Phone className="w-5 h-5 text-emerald-700" />
+                  <div className="p-3 bg-gray-100 dark:bg-slate-700 rounded-xl">
+                    <Phone className="w-5 h-5 text-amber-600" />
                   </div>
-                  <a href="tel:+14372210664" className="hover:text-emerald-700">
+                  <a href="tel:+14372210664" className="hover:text-amber-600">
                     +1 (437) 221-0664
                   </a>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-xl">
-                    <Github className="w-5 h-5 text-emerald-700" />
+                  <div className="p-3 bg-gray-100 dark:bg-slate-700 rounded-xl">
+                    <Github className="w-5 h-5 text-amber-600" />
                   </div>
-                  <a href="https://github.com/mbabazielroy" className="hover:text-emerald-700">
+                  <a href="https://github.com/mbabazielroy" className="hover:text-amber-600">
                     github.com/mbabazielroy
                   </a>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-xl">
-                    <Linkedin className="w-5 h-5 text-emerald-700" />
+                  <div className="p-3 bg-gray-100 dark:bg-slate-700 rounded-xl">
+                    <Linkedin className="w-5 h-5 text-amber-600" />
                   </div>
-                  <a href="https://www.linkedin.com/in/elroy-mbabazi/" className="hover:text-emerald-700">
+                  <a href="https://www.linkedin.com/in/elroy-mbabazi/" className="hover:text-amber-600">
                     linkedin.com/in/elroy-mbabazi/
                   </a>
                 </div>
@@ -334,7 +333,7 @@ function MainContent() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 text-center text-gray-600 dark:text-gray-400">
+      <footer className="py-8 text-center text-gray-600 dark:text-slate-400">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p>&copy; {new Date().getFullYear()} Elroy Mbabazi. All rights reserved.</p>
         </div>
@@ -361,9 +360,6 @@ export default function App() {
           </Suspense>
         } />
       </Routes>
-
-      {/* Add the ChatBot component */}
-      <ChatBot projects={projects} />
     </Router>
   );
 }

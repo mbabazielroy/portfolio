@@ -10,6 +10,13 @@ export default {
       animation: {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
+      colors: {
+        sendly: {
+          DEFAULT: '#3EC44A',
+          dark:    '#2da63a',
+          light:   '#6dd876',
+        },
+      },
     },
   },
   plugins: [],

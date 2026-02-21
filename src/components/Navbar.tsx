@@ -41,7 +41,7 @@ export default function Navbar() {
                 <a
                   key={item.href}
                   href={item.href}
-                  className="relative text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-0.5 after:scale-x-0 hover:after:scale-x-100 after:origin-center after:transition-transform after:bg-gradient-to-r after:from-emerald-600 after:to-amber-500"
+                  className="relative text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-0.5 after:scale-x-0 hover:after:scale-x-100 after:origin-center after:transition-transform after:bg-gradient-to-r after:from-amber-500 after:to-amber-300"
                   onClick={e => handleNavClick(e, item.href)}
                 >
                   {item.label}
