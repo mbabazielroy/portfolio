@@ -92,11 +92,20 @@ export default function BusinessCard() {
 
           {/* Header */}
           <div className="px-8 pt-8 pb-6 border-b border-zinc-800">
-            <p className="text-xs font-bold tracking-widest uppercase text-zinc-500 mb-3">
-              Mbabazi Technologies Inc.
-            </p>
-            <h1 className="text-3xl font-bold text-white mb-1">Elroy Mbabazi</h1>
-            <p className="text-zinc-400 font-medium">Founder</p>
+            <div className="flex items-center gap-4 mb-4">
+              <img
+                src="/elroyheadshot.jpg"
+                alt="Elroy Mbabazi"
+                className="w-16 h-16 rounded-full object-cover border-2 border-[#3EC44A]/40 flex-shrink-0"
+              />
+              <div>
+                <p className="text-xs font-bold tracking-widest uppercase text-zinc-500 mb-1">
+                  Mbabazi Technologies Inc.
+                </p>
+                <h1 className="text-2xl font-bold text-white leading-tight">Elroy Mbabazi</h1>
+                <p className="text-zinc-400 text-sm font-medium">Founder</p>
+              </div>
+            </div>
 
             {/* Sendly block */}
             <div className="mt-4 bg-zinc-800 border border-[#3EC44A]/20 rounded-xl px-4 py-3">

@@ -15,7 +15,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
   return (
     <div className="group bg-white/90 dark:bg-gray-900/70 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-800">
-      <div className="h-1 w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500" />
+      <div className="h-1 w-full bg-[#3EC44A]" />
       <div className="relative overflow-hidden">
         <img
           src={project.image}
@@ -61,7 +61,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`View code for ${project.title}`}
-              className="flex items-center text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+              className="flex items-center text-gray-700 dark:text-gray-300 hover:text-zinc-900 dark:hover:text-zinc-50"
             >
               <Github className="mr-1" size={16} />
               <span>Code</span>
@@ -73,7 +73,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`View live demo of ${project.title}`}
-              className="flex items-center text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+              className="flex items-center text-gray-700 dark:text-gray-300 hover:text-zinc-900 dark:hover:text-zinc-50"
             >
               <Link className="mr-1" size={16} />
               <span>Demo</span>
