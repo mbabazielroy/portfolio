@@ -17,6 +17,7 @@ import SkillCard from './components/SkillCard';
 import { experience, projects } from './data';
 import ChatBot from './components/ChatBot';
 import BackToTopButton from './components/BackToTopButton';
+const BusinessCardLazy = lazy(() => import('./components/BusinessCard'));
 
 const skills = [
   { name: 'Frontend Development', icon: <FileCode className="w-6 h-6" /> },
@@ -134,10 +135,10 @@ function MainContent() {
                 </ol>
               </div>
               <div className="space-y-3">
-                <p className="text-sm italic text-gray-600 dark:text-gray-400 border-l-4 border-blue-500 pl-3">
+                <p className="text-sm italic text-gray-600 dark:text-gray-400 border-l-4 border-amber-400 pl-3">
                   "Clear communication, fast iterations, and reliable delivery on our web app." — Small business client
                 </p>
-                <p className="text-sm italic text-gray-600 dark:text-gray-400 border-l-4 border-blue-500 pl-3">
+                <p className="text-sm italic text-gray-600 dark:text-gray-400 border-l-4 border-amber-400 pl-3">
                   "Collaborative and thoughtful, especially around stakeholder needs and reporting." — Campus leadership
                 </p>
               </div>
@@ -146,32 +147,45 @@ function MainContent() {
         </div>
       </section>
 
-      {/* What I'm Building — immediately after About */}
-      <section id="building" className="py-20 bg-gray-100 dark:bg-gray-800">
+      {/* Sendly — immediately after About */}
+      <section id="building" className="py-20 bg-stone-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-3">
+            <span className="text-xs font-bold tracking-widest uppercase text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 px-3 py-1 rounded-full">
+              Active Product
+            </span>
+          </div>
           <SectionHeading
-            title="What I'm Building"
-            subtitle="Current focus — Sendly"
+            title="Sendly"
+            subtitle="Mobile money for East Africa — built on trust, not luck."
           />
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             <div className="space-y-6">
               <p className="text-lg text-gray-600 dark:text-gray-400">
-                Mobile money in East Africa is widely used but prone to a specific, costly error:
-                funds sent to a wrong number complete instantly with no built-in way to reverse them.
-                A single mistyped digit is enough.
+                Mobile money is how hundreds of millions of East Africans pay rent, send money home,
+                and run small businesses. But one wrong digit sends funds to a stranger — instantly,
+                and with no way back. This isn't a rare edge case. It's a daily reality.
               </p>
               <p className="text-lg text-gray-600 dark:text-gray-400">
                 <strong className="text-gray-800 dark:text-gray-200">Sendly</strong> replaces phone
-                numbers with usernames and adds a recipient confirmation step before any funds move.
-                The goal is to make every transaction feel deliberate — and to build the kind of trust
-                that keeps people coming back to a platform.
+                numbers with usernames and shows the recipient's name for confirmation before any
+                funds move. Simple fix, serious trust. The kind of product that people recommend
+                to their whole family.
               </p>
-              <a
-                href="mailto:mbabazielroy@yahoo.com?subject=Sendly%20Inquiry"
-                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-colors"
-              >
-                Contact me about Sendly
-              </a>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href="mailto:mbabazielroy@yahoo.com?subject=Sendly%20Inquiry"
+                  className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-3 rounded-xl font-semibold transition-colors shadow-md shadow-emerald-700/20"
+                >
+                  Talk to me about Sendly
+                </a>
+                <a
+                  href="/#/card"
+                  className="inline-flex items-center gap-2 border border-emerald-700 text-emerald-700 dark:text-emerald-400 dark:border-emerald-600 px-6 py-3 rounded-xl font-semibold transition-colors hover:bg-emerald-50 dark:hover:bg-emerald-900/20"
+                >
+                  My business card
+                </a>
+              </div>
             </div>
             <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-sm space-y-5">
               <h4 className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
@@ -224,8 +238,8 @@ function MainContent() {
                   aria-pressed={isActive}
                   className={`px-3 py-1.5 rounded-full border text-xs font-semibold transition-colors ${
                     isActive
-                      ? 'bg-blue-600 text-white border-blue-600'
-                      : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border-gray-300 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-700'
+                      ? 'bg-emerald-700 text-white border-emerald-700'
+                      : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border-gray-300 dark:border-gray-700 hover:bg-emerald-50 dark:hover:bg-gray-700'
                   }`}
                 >
                   {tag}
@@ -258,7 +272,7 @@ function MainContent() {
           <div className="text-center">
             <a
               href="https://github.com/mbabazielroy"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors"
             >
               <Github className="w-4 h-4" />
               View all projects on GitHub
@@ -283,33 +297,33 @@ function MainContent() {
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
                   <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-xl">
-                    <Mail className="w-5 h-5 text-blue-600" />
+                    <Mail className="w-5 h-5 text-emerald-700" />
                   </div>
-                  <a href="mailto:mbabazielroy@yahoo.com" className="hover:text-blue-600">
+                  <a href="mailto:mbabazielroy@yahoo.com" className="hover:text-emerald-700">
                     mbabazielroy@yahoo.com
                   </a>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-xl">
-                    <Phone className="w-5 h-5 text-blue-600" />
+                    <Phone className="w-5 h-5 text-emerald-700" />
                   </div>
-                  <a href="tel:+14372210664" className="hover:text-blue-600">
+                  <a href="tel:+14372210664" className="hover:text-emerald-700">
                     +1 (437) 221-0664
                   </a>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-xl">
-                    <Github className="w-5 h-5 text-blue-600" />
+                    <Github className="w-5 h-5 text-emerald-700" />
                   </div>
-                  <a href="https://github.com/mbabazielroy" className="hover:text-blue-600">
+                  <a href="https://github.com/mbabazielroy" className="hover:text-emerald-700">
                     github.com/mbabazielroy
                   </a>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-xl">
-                    <Linkedin className="w-5 h-5 text-blue-600" />
+                    <Linkedin className="w-5 h-5 text-emerald-700" />
                   </div>
-                  <a href="https://www.linkedin.com/in/elroy-mbabazi/" className="hover:text-blue-600">
+                  <a href="https://www.linkedin.com/in/elroy-mbabazi/" className="hover:text-emerald-700">
                     linkedin.com/in/elroy-mbabazi/
                   </a>
                 </div>
@@ -339,6 +353,11 @@ export default function App() {
         <Route path="/admin" element={
           <Suspense fallback={<div>Loading...</div>}>
             <AdminMessagesLazy />
+          </Suspense>
+        } />
+        <Route path="/card" element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <BusinessCardLazy />
           </Suspense>
         } />
       </Routes>

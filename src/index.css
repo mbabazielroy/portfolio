@@ -4,9 +4,9 @@
 
 @layer base {
   :root {
-    --accent: #2563eb;
-    --accent-2: #7c3aed;
-    --glow: rgba(37, 99, 235, 0.2);
+    --accent: #047857;
+    --accent-2: #b45309;
+    --glow: rgba(4, 120, 87, 0.2);
   }
 }
 
@@ -16,8 +16,8 @@
     background-size: 24px 24px;
   }
   .bg-glow {
-    background: radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.18), transparent 30%),
-      radial-gradient(circle at 80% 10%, rgba(124, 58, 237, 0.14), transparent 28%),
-      radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.12), transparent 30%);
+    background: radial-gradient(circle at 20% 20%, rgba(4, 120, 87, 0.15), transparent 30%),
+      radial-gradient(circle at 80% 10%, rgba(180, 83, 9, 0.10), transparent 28%),
+      radial-gradient(circle at 50% 80%, rgba(5, 150, 105, 0.10), transparent 30%);
   }
 }
