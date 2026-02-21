@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Phone, Download, ExternalLink } from 'lucide-react';
+import { Github, Linkedin, Mail, Phone, Download, ExternalLink, Share2 } from 'lucide-react';
 
 function downloadVCard() {
   const vcard = [
@@ -11,9 +11,9 @@ function downloadVCard() {
     'EMAIL:mbabazielroy@yahoo.com',
     'URL:https://www.linkedin.com/in/elroy-mbabazi/',
     'URL:https://github.com/mbabazielroy',
-    'NOTE:Founder of Sendly — mobile money for East Africa. Building safer transactions with username-based transfers and recipient confirmation.',
+    'NOTE:Founder of Sendly — mobile money for East Africa. Username-based transfers with recipient confirmation before any funds move.',
     'END:VCARD',
-  ].join('\n');
+  ].join('\r\n');
 
   const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
   const url = URL.createObjectURL(blob);
@@ -24,6 +24,28 @@ function downloadVCard() {
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+}
+
+async function shareCard(portfolioUrl: string) {
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: 'Elroy Mbabazi — Founder, Mbabazi Technologies',
+        text: 'Building Sendly — safer mobile money for East Africa.',
+        url: portfolioUrl,
+      });
+    } catch {
+      // user cancelled — do nothing
+    }
+  } else {
+    // Fallback: copy URL to clipboard
+    try {
+      await navigator.clipboard.writeText(portfolioUrl);
+      alert('Link copied to clipboard!');
+    } catch {
+      // clipboard not available
+    }
+  }
 }
 
 const LINKS = [
@@ -50,54 +72,59 @@ const LINKS = [
 ];
 
 export default function BusinessCard() {
-  const portfolioUrl = typeof window !== 'undefined'
-    ? window.location.href.replace(/\/?#\/card$/, '')
-    : '';
+  const portfolioUrl =
+    typeof window !== 'undefined'
+      ? window.location.href.replace(/\/?#\/card\/?$/, '')
+      : '';
 
-  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&color=d97706&bgcolor=1e293b&data=${encodeURIComponent(portfolioUrl)}`;
+  // QR code: white bg, Sendly green dots — points to portfolio root
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&color=3EC44A&bgcolor=18181b&data=${encodeURIComponent(portfolioUrl)}`;
 
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-zinc-950 flex items-center justify-center p-4">
       <div className="w-full max-w-sm">
 
         {/* Card */}
-        <div className="bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-slate-800">
+        <div className="bg-zinc-900 rounded-3xl overflow-hidden shadow-2xl border border-zinc-800">
 
-          {/* Top accent bar — amber for portfolio, sendly green stripe */}
-          <div className="h-1.5 flex">
-            <div className="flex-1 bg-gradient-to-r from-amber-600 to-amber-400" />
-            <div className="w-8 bg-[#3EC44A]" />
-          </div>
+          {/* Top bar — full Sendly brand green (this is a Sendly company card) */}
+          <div className="h-1 bg-[#3EC44A]" />
 
           {/* Header */}
-          <div className="px-8 pt-8 pb-6 border-b border-slate-800">
-            <p className="text-xs font-bold tracking-widest uppercase text-amber-500 mb-3">
+          <div className="px-8 pt-8 pb-6 border-b border-zinc-800">
+            <p className="text-xs font-bold tracking-widest uppercase text-zinc-500 mb-3">
               Mbabazi Technologies Inc.
             </p>
-            <h1 className="text-3xl font-bold text-white mb-1">
-              Elroy Mbabazi
-            </h1>
-            <p className="text-slate-400 font-medium">Founder</p>
+            <h1 className="text-3xl font-bold text-white mb-1">Elroy Mbabazi</h1>
+            <p className="text-zinc-400 font-medium">Founder</p>
 
-            {/* Sendly block — uses brand green */}
-            <div className="mt-4 bg-slate-800/60 border border-[#3EC44A]/20 rounded-xl px-4 py-3">
-              <p className="text-xs text-slate-400 uppercase tracking-widest font-semibold mb-1">Building</p>
-              <p className="text-sm font-semibold" style={{ color: '#3EC44A' }}>Sendly</p>
-              <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
-                Safer mobile money for East Africa — username transfers with recipient confirmation.
+            {/* Sendly block */}
+            <div className="mt-4 bg-zinc-800 border border-[#3EC44A]/20 rounded-xl px-4 py-3">
+              <p className="text-xs text-zinc-500 uppercase tracking-widest font-semibold mb-1">
+                Building
+              </p>
+              <p className="text-sm font-bold" style={{ color: '#3EC44A' }}>
+                Sendly
+              </p>
+              <p className="text-xs text-zinc-400 mt-0.5 leading-relaxed">
+                Safer mobile money for East Africa — username transfers with
+                recipient confirmation.
               </p>
             </div>
           </div>
 
           {/* Contact links */}
-          <div className="px-8 py-6 space-y-4 border-b border-slate-800">
+          <div className="px-8 py-6 space-y-4 border-b border-zinc-800">
             {LINKS.map(({ icon, label, href }) => (
               <a
                 key={href}
                 href={href}
-                className="flex items-center gap-3 text-slate-300 hover:text-amber-400 transition-colors group"
+                className="flex items-center gap-3 text-zinc-300 hover:text-white transition-colors group"
               >
-                <span className="text-amber-600 group-hover:text-amber-400 transition-colors flex-shrink-0">
+                <span
+                  className="flex-shrink-0 transition-colors"
+                  style={{ color: '#3EC44A' }}
+                >
                   {icon}
                 </span>
                 <span className="text-sm font-medium truncate">{label}</span>
@@ -107,28 +134,52 @@ export default function BusinessCard() {
 
           {/* Footer: QR + actions */}
           <div className="px-8 py-6 flex items-end justify-between gap-4">
-            <div className="flex flex-col items-center gap-2">
+            {/* QR code — points to portfolio */}
+            <div className="flex flex-col items-center gap-1.5">
               <img
                 src={qrUrl}
-                alt="Scan to visit portfolio"
-                width={70}
-                height={70}
-                className="rounded-lg opacity-90"
+                alt="Scan to open portfolio"
+                width={64}
+                height={64}
+                className="rounded-lg"
               />
-              <p className="text-xs text-slate-500">Portfolio</p>
+              <p className="text-xs text-zinc-600">Portfolio</p>
             </div>
 
+            {/* Actions */}
             <div className="flex flex-col gap-2 flex-1">
+              {/*
+                "Save Contact" downloads a .vcf vCard file.
+                On iOS Safari this triggers "Add to Contacts" natively.
+                On Android it opens the Contacts app.
+                Apple Wallet .pkpass requires server-side Apple certificate
+                signing, which isn't available in a static site.
+              */}
               <button
                 onClick={downloadVCard}
-                className="flex items-center justify-center gap-2 bg-amber-600 hover:bg-amber-500 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors w-full shadow-md shadow-amber-600/20"
+                className="flex items-center justify-center gap-2 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors w-full"
+                style={{ backgroundColor: '#3EC44A' }}
               >
                 <Download className="w-4 h-4" />
                 Save Contact
               </button>
+
+              {/*
+                Share button uses the Web Share API on mobile (iOS / Android).
+                On iOS this shows the native share sheet — includes AirDrop,
+                Messages, Mail, and "Add to Contacts". Falls back to clipboard copy.
+              */}
+              <button
+                onClick={() => shareCard(portfolioUrl)}
+                className="flex items-center justify-center gap-2 border border-zinc-700 hover:border-zinc-500 text-zinc-300 hover:text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors w-full"
+              >
+                <Share2 className="w-4 h-4" />
+                Share
+              </button>
+
               <a
                 href="/#"
-                className="flex items-center justify-center gap-2 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors w-full"
+                className="flex items-center justify-center gap-2 border border-zinc-800 hover:border-zinc-700 text-zinc-500 hover:text-zinc-300 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors w-full"
               >
                 <ExternalLink className="w-4 h-4" />
                 Portfolio
@@ -137,7 +188,7 @@ export default function BusinessCard() {
           </div>
         </div>
 
-        <p className="text-center text-xs text-slate-600 mt-4">
+        <p className="text-center text-xs text-zinc-700 mt-4">
           elroy.mbabazi &nbsp;·&nbsp; Ontario, Canada
         </p>
       </div>
