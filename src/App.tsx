@@ -80,9 +80,7 @@ function MainContent() {
                 I'm a founder and product builder based in Canada, building software
                 focused on trust, safety, and usability in everyday systems. I'm the
                 founder of <strong className="text-gray-800 dark:text-slate-200">Mbabazi Technologies Inc.</strong>, an Ontario-incorporated company,
-                and the creator of <strong className="text-gray-800 dark:text-slate-200">Sendly</strong> — a mobile money platform designed for East
-                Africa that reduces transaction errors by replacing phone numbers with
-                usernames and recipient confirmation.
+                and the creator of <strong className="text-gray-800 dark:text-slate-200">Sendly</strong> — a safety and usability layer on East Africa's existing mobile money infrastructure, built to prevent wrong-recipient transfers by replacing phone numbers with usernames and requiring recipient confirmation before funds move.
               </p>
               <p className="text-lg text-gray-600 dark:text-slate-400">
                 I have lived experience using mobile money systems in East Africa and
@@ -156,20 +154,21 @@ function MainContent() {
           </div>
           <SectionHeading
             title="Sendly"
-            subtitle="Mobile money for East Africa — built on trust, not luck."
+            subtitle="Fewer wrong transfers. Clearer mobile money."
           />
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             <div className="space-y-6">
               <p className="text-lg text-gray-600 dark:text-slate-400">
                 Mobile money is how hundreds of millions of East Africans pay rent, send money home,
-                and run small businesses. But one wrong digit sends funds to a stranger — instantly,
-                and with no way back. This isn't a rare edge case. It's a daily reality.
+                and run small businesses. But one mistyped digit sends funds to the wrong person —
+                instantly, with no way to reverse it. This isn't an edge case. It happens every day.
               </p>
               <p className="text-lg text-gray-600 dark:text-slate-400">
-                <strong className="text-gray-800 dark:text-slate-200">Sendly</strong> replaces phone
-                numbers with usernames and shows the recipient's name for confirmation before any
-                funds move. Simple fix, serious trust. The kind of product that people recommend
-                to their whole family.
+                <strong className="text-gray-800 dark:text-slate-200">Sendly</strong> is a safety
+                and usability layer that sits on top of existing mobile money infrastructure. It
+                replaces phone numbers with usernames and shows the recipient's name and photo
+                for confirmation before any funds move — so users know exactly who they're paying
+                before it's too late.
               </p>
               <div className="flex flex-wrap gap-3">
                 <a

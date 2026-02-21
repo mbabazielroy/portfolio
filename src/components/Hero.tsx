@@ -34,18 +34,18 @@ export default function Hero() {
 
             <div className="space-y-5">
               <h1 className="text-5xl md:text-7xl font-bold leading-tight text-zinc-900 dark:text-zinc-50">
-                Building safer<br />
-                <span className="text-sendly">mobile money.</span>
+                Catch the mistake<br />
+                <span className="text-sendly">before funds move.</span>
               </h1>
               <p className="text-sm text-zinc-400 dark:text-zinc-500 font-medium tracking-widest uppercase">
                 Elroy Mbabazi &nbsp;&middot;&nbsp; Founder, Mbabazi Technologies Inc.
               </p>
               <p className="text-xl text-zinc-600 dark:text-zinc-300 max-w-lg leading-relaxed">
-                Millions of East Africans lose money to a single mistyped digit —
-                instantly, and with no way back. I'm building{' '}
-                <strong className="text-sendly font-semibold">Sendly</strong> to fix
-                that: username-based transfers with recipient confirmation before any
-                funds move.
+                Millions of East Africans lose money to a single mistyped phone number —
+                instantly, with no way back. I'm building{' '}
+                <strong className="text-sendly font-semibold">Sendly</strong> — a safety
+                layer on existing mobile money systems that replaces phone numbers with
+                usernames and confirms the recipient before any funds move.
               </p>
             </div>
 
