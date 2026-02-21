@@ -7,7 +7,7 @@ interface ExperienceCardProps {
 export default function ExperienceCard({ experience }: ExperienceCardProps) {
   return (
     <div className="group bg-white/90 dark:bg-gray-900/70 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-800">
-      <div className="h-1 w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500" />
+      <div className="h-1 w-full bg-[#3EC44A]" />
       <div className="p-6 space-y-4">
         <div className="flex items-start justify-between gap-3">
           <div>
@@ -16,7 +16,7 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
               {experience.company} · {experience.location}
             </p>
           </div>
-          <span className="flex-shrink-0 text-xs font-semibold px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-100 border border-blue-200/70 dark:border-blue-800/60 shadow-sm leading-tight">
+          <span className="flex-shrink-0 text-xs font-semibold px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 leading-tight">
             {experience.period}
           </span>
         </div>
@@ -30,7 +30,7 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
             {experience.tags.slice(0, 6).map((tag) => (
               <span
                 key={tag}
-                className="px-2 py-1 text-[11px] font-medium bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-200 rounded-full"
+                className="px-2 py-1 text-[11px] font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 rounded-full"
               >
                 {tag}
               </span>
