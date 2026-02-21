@@ -11,7 +11,7 @@ function downloadVCard() {
     'EMAIL:mbabazielroy@yahoo.com',
     'URL:https://www.linkedin.com/in/elroy-mbabazi/',
     'URL:https://github.com/mbabazielroy',
-    'NOTE:Founder of Sendly — mobile money for East Africa. Username-based transfers with recipient confirmation before any funds move.',
+    'NOTE:Founder of Sendly — a safety layer on East Africa\'s mobile money systems. Replaces phone numbers with usernames and confirms the recipient before any funds move.',
     'END:VCARD',
   ].join('\r\n');
 
@@ -116,8 +116,8 @@ export default function BusinessCard() {
                 Sendly
               </p>
               <p className="text-xs text-zinc-400 mt-0.5 leading-relaxed">
-                Safer mobile money for East Africa — username transfers with
-                recipient confirmation.
+                A safety layer on East Africa's mobile money — usernames replace
+                phone numbers, recipient confirmed before funds move.
               </p>
             </div>
           </div>
